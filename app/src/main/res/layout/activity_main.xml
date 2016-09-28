@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ECECEC"
+    android:orientation="vertical"
+    tools:context="com.example.rex.xmcg.MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/carousel" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:background="#ffffff"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/user" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="做最好的医院" />
+    </LinearLayout>
+
+    <android.support.v7.widget.GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:columnCount="2"
+        android:layout_centerInParent="true"
+        app:useDefaultMargins="true"
+        app:rowCount="3">
+
+        <LinearLayout
+            android:background="#fff"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_column="0"
+            app:layout_columnWeight="1"
+            app:layout_row="0"
+            app:layout_rowSpan="2">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/bg_circle" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="做医院" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="#ffffff"
+            android:orientation="horizontal"
+            app:layout_column="1"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"
+            app:layout_row="0">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/bg_circle" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="做医院" />
+        </LinearLayout>
+
+        <LinearLayout
+
+            app:layout_rowWeight="1"
+            android:background="#ffffff"
+            android:orientation="horizontal"
+            app:layout_column="1"
+            app:layout_columnWeight="1"
+            app:layout_row="1">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/bg_circle" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="做医院" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="#ffffff"
+            android:orientation="horizontal"
+            app:layout_column="0"
+            app:layout_columnWeight="1"
+            app:layout_row="2">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/bg_circle" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="做医院" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="#ffffff"
+            android:orientation="horizontal"
+            app:layout_column="1"
+            app:layout_columnWeight="1"
+            app:layout_row="2">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/bg_circle" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="做医院" />
+        </LinearLayout>
+    </android.support.v7.widget.GridLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <com.flyco.tablayout.CommonTabLayout
+        android:id="@+id/tl_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        app:tl_textSelectColor="#2C97DE"
+        app:tl_textUnselectColor="#66000000"
+        app:tl_underline_color="#DDDDDD"
+        app:tl_underline_height="1dp"
+        app:tl_indicator_color="#2C97DE"
+        app:tl_indicator_height="0dp"/>
+
+</LinearLayout>
