@@ -7,6 +7,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.example.rex.xmcg.entity.TabEntity;
+import com.example.rex.xmcg.fragment.FragmentHealth;
+import com.example.rex.xmcg.fragment.FragmentHome;
+import com.example.rex.xmcg.fragment.FragmentHospital;
+import com.example.rex.xmcg.fragment.FragmentLogin;
+import com.example.rex.xmcg.fragment.FragmentMy;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;

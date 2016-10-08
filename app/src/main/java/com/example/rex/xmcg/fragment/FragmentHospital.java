@@ -1,4 +1,4 @@
-package com.example.rex.xmcg;
+package com.example.rex.xmcg.fragment;
 
 /**
  * Created by Rex on 2016/10/7.

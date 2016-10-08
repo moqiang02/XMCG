@@ -1,4 +1,4 @@
-package com.example.rex.xmcg;
+package com.example.rex.xmcg.entity;
 
 import com.flyco.tablayout.listener.CustomTabEntity;
 
