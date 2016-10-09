@@ -13,6 +13,7 @@ import com.example.rex.xmcg.fragment.FragmentHome;
 import com.example.rex.xmcg.fragment.FragmentHospital;
 import com.example.rex.xmcg.fragment.FragmentLogin;
 import com.example.rex.xmcg.fragment.FragmentMy;
+import com.example.rex.xmcg.utils.SPUtils;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
@@ -53,14 +54,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabSelect(int position) {
                 if (position == 3) {
-                    FragmentManager mFragmentManager = getSupportFragmentManager();
-                    FragmentTransaction ft = mFragmentManager.beginTransaction();
-                    ft.hide(mFragments.get(0));
-                    ft.hide(mFragments.get(1));
-                    ft.hide(mFragments.get(2));
-                    ft.hide(mFragments.get(3));
-                    ft.show(mFragments.get(4));
-                    ft.commit();
+                    if (!(boolean) SPUtils.get(getApplicationContext(), "isLogin", false)) {
+                        FragmentManager mFragmentManager = getSupportFragmentManager();
+                        FragmentTransaction ft = mFragmentManager.beginTransaction();
+                        ft.hide(mFragments.get(0));
+                        ft.hide(mFragments.get(1));
+                        ft.hide(mFragments.get(2));
+                        ft.hide(mFragments.get(3));
+                        ft.show(mFragments.get(4));
+                        ft.commit();
+                    }
+
                 }
             }
 
