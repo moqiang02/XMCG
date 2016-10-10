@@ -32,4 +32,5 @@ dependencies {
     compile 'com.orhanobut:logger:1.15'
     compile 'org.xutils:xutils:3.3.36'
     compile 'com.google.code.gson:gson:2.6.2'
+    compile 'com.jakewharton:butterknife:8.1.0'
 }
