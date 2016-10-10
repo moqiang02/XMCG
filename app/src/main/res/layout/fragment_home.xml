@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#ECECEC"
     android:orientation="vertical"
-    tools:context="com.example.rex.xmcg.MainActivity">
+    tools:context="com.example.rex.xmcg.activity.MainActivity">
 
     <ImageView
         android:layout_width="match_parent"

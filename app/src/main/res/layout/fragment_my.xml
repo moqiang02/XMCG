@@ -21,13 +21,13 @@
             android:textSize="18sp" />
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="20dp"
             android:layout_marginTop="10dp"
-            android:src="@mipmap/logo" />
+            android:src="@mipmap/mail" />
 
         <ImageView
             android:id="@+id/head_icon"
@@ -85,8 +85,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#787979" />
+        android:layout_height="1dip"
+        android:background="#dee1e1" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -103,6 +103,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/family_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2"
@@ -130,9 +131,10 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/doctor_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2"
+                android:text="21"
                 android:textColor="#ec8841" />
 
             <TextView
@@ -144,10 +146,11 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#787979" />
+        android:layout_height="1dip"
+        android:background="#dee1e1" />
 
     <LinearLayout
+        android:id="@+id/bespeak"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -161,7 +164,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:src="@mipmap/user" />
+            android:src="@mipmap/bespeak" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -184,10 +187,11 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#787979" />
+        android:layout_height="1dip"
+        android:background="#dee1e1" />
 
     <LinearLayout
+        android:id="@+id/report"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#fff"
@@ -200,7 +204,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:src="@mipmap/user" />
+            android:src="@mipmap/report" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -223,8 +227,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#787979" />
+        android:layout_height="1dip"
+        android:background="#dee1e1" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -239,7 +243,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:src="@mipmap/user" />
+            android:src="@mipmap/pay" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -262,8 +266,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#787979" />
+        android:layout_height="1dip"
+        android:background="#dee1e1" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -279,7 +283,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:src="@mipmap/user" />
+            android:src="@mipmap/comment" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -302,8 +306,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#787979" />
+        android:layout_height="1dip"
+        android:background="#dee1e1" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -318,7 +322,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:src="@mipmap/user" />
+            android:src="@mipmap/service" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -341,8 +345,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#787979" />
+        android:layout_height="1dip"
+        android:background="#dee1e1" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -357,7 +361,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:src="@mipmap/user" />
+            android:src="@mipmap/setting" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -380,6 +384,6 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#787979" />
+        android:layout_height="1dip"
+        android:background="#dee1e1" />
 </LinearLayout>

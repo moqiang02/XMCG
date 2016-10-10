@@ -1,4 +1,4 @@
-package com.example.rex.xmcg;
+package com.example.rex.xmcg.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.example.rex.xmcg.R;
+import com.example.rex.xmcg.ViewFindUtils;
 import com.example.rex.xmcg.entity.TabEntity;
 import com.example.rex.xmcg.fragment.FragmentHealth;
 import com.example.rex.xmcg.fragment.FragmentHome;
@@ -25,11 +27,11 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private String[] mTitles = {"首页", "健康", "医院", "我的"};
     private int[] mIconUnselectIds = {
-            R.mipmap.tab_home_unselect, R.mipmap.tab_speech_unselect,
-            R.mipmap.tab_contact_unselect, R.mipmap.tab_more_unselect};
+            R.mipmap.tab_home_unselect, R.mipmap.tab_health_unselect,
+            R.mipmap.tab_hospital_unselect, R.mipmap.tab_my_unselect};
     private int[] mIconSelectIds = {
-            R.mipmap.tab_home_select, R.mipmap.tab_speech_select,
-            R.mipmap.tab_contact_select, R.mipmap.tab_more_select};
+            R.mipmap.tab_home_select, R.mipmap.tab_health_select,
+            R.mipmap.tab_hospital_select, R.mipmap.tab_my_select};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private View mDecorView;
 
@@ -75,4 +77,5 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
 }
