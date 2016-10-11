@@ -6,8 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.rex.xmcg.R;
-import com.example.rex.xmcg.ViewFindUtils;
-import com.example.rex.xmcg.entity.TabEntity;
+import com.example.rex.xmcg.utils.ViewFindUtils;
+import com.example.rex.xmcg.model.Tab;
 import com.example.rex.xmcg.fragment.FragmentVis;
 import com.example.rex.xmcg.fragment.FragmentVisOld;
 import com.example.rex.xmcg.weiget.TitleBar;
@@ -48,7 +48,7 @@ public class BespeakActivity extends AppCompatActivity {
         titleBar.setTitle("我的预约");
 
         for (int i = 0; i < mTitles.length; i++) {
-            mTabEntities.add(new TabEntity(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]));
+            mTabEntities.add(new Tab(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]));
         }
         mDecorView = getWindow().getDecorView();
         mFragments.add(new FragmentVis());

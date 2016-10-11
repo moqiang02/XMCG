@@ -1,13 +1,13 @@
-package com.example.rex.xmcg.entity;
+package com.example.rex.xmcg.model;
 
 import com.flyco.tablayout.listener.CustomTabEntity;
 
-public class TabEntity implements CustomTabEntity {
+public class Tab implements CustomTabEntity {
     public String title;
     public int selectedIcon;
     public int unSelectedIcon;
 
-    public TabEntity(String title, int selectedIcon, int unSelectedIcon) {
+    public Tab(String title, int selectedIcon, int unSelectedIcon) {
         this.title = title;
         this.selectedIcon = selectedIcon;
         this.unSelectedIcon = unSelectedIcon;

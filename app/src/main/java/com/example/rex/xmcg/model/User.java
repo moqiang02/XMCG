@@ -1,10 +1,10 @@
-package com.example.rex.xmcg.entity;
+package com.example.rex.xmcg.model;
 
 /**
  * Created by Rex on 2016/10/9.
  */
 
-public class UserEntity {
+public class User {
     public String patNumber;
     public String idNumber;
     public String idType;

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#fff"
+    android:layout_marginTop="6dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="距离就诊还有"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/day"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1天"
+            android:textColor="@color/text_orange"
+            android:textSize="18dp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_white"
+            android:text="充值" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:text="已超过退约时间，如需退约，请致电13222"
+        android:textSize="15dp"
+        android:visibility="gone" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/line_gray" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/head"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="15dp"
+            android:src="@mipmap/bg_circle" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/head"
+            android:text="姓名"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/department"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/name"
+            android:text="科室"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/xuhao"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name"
+            android:layout_toRightOf="@+id/head"
+            android:text="预约序号"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name"
+            android:layout_toRightOf="@+id/xuhao"
+            android:text="1213"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/ghf"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/xuhao"
+            android:layout_toRightOf="@+id/head"
+            android:text="挂号费"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/cost"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/xuhao"
+            android:layout_toRightOf="@+id/ghf"
+            android:text="12"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/xuhao"
+            android:layout_toRightOf="@+id/cost"
+            android:text="未付款"
+            android:textSize="15dp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/line_gray" />
+
+    <RelativeLayout
+        android:paddingLeft="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/jzr"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="就诊人"
+            android:layout_marginBottom="8dp"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/person"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/jzr"
+            android:text="name"
+            android:layout_marginBottom="8dp"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/jzsj"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/jzr"
+            android:text="就诊时间"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/jzr"
+            android:layout_toRightOf="@+id/jzsj"
+            android:text="name"
+            android:textSize="15dp" />
+    </RelativeLayout>
+</LinearLayout>

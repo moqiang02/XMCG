@@ -8,8 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.rex.xmcg.R;
-import com.example.rex.xmcg.ViewFindUtils;
-import com.example.rex.xmcg.entity.TabEntity;
+import com.example.rex.xmcg.utils.ViewFindUtils;
+import com.example.rex.xmcg.model.Tab;
 import com.example.rex.xmcg.fragment.FragmentHealth;
 import com.example.rex.xmcg.fragment.FragmentHome;
 import com.example.rex.xmcg.fragment.FragmentHospital;
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         for (int i = 0; i < mTitles.length; i++) {
-            mTabEntities.add(new TabEntity(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]));
+            mTabEntities.add(new Tab(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]));
         }
         mDecorView = getWindow().getDecorView();
         mFragments.add(new FragmentHome());

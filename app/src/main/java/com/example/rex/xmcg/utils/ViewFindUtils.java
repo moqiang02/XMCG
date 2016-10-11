@@ -1,4 +1,4 @@
-package com.example.rex.xmcg;
+package com.example.rex.xmcg.utils;
 
 import android.util.SparseArray;
 import android.view.View;

@@ -1,4 +1,4 @@
-package com.example.rex.xmcg.entity;
+package com.example.rex.xmcg.model;
 
 import java.util.List;
 

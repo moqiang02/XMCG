@@ -10,8 +10,8 @@ import android.widget.Toast;
 
 import com.example.rex.xmcg.R;
 import com.example.rex.xmcg.URL;
-import com.example.rex.xmcg.entity.ResultBean;
-import com.example.rex.xmcg.entity.UserEntity;
+import com.example.rex.xmcg.model.ResultBean;
+import com.example.rex.xmcg.model.User;
 import com.example.rex.xmcg.utils.CommonUtils;
 import com.example.rex.xmcg.utils.SPUtils;
 import com.google.gson.Gson;
@@ -90,12 +90,14 @@ public class FragmentLogin extends android.support.v4.app.Fragment implements Vi
                 x.http().get(params, new Callback.CommonCallback<String>() {
                     @Override
                     public void onSuccess(String result) {
-                        java.lang.reflect.Type type = new TypeToken<ResultBean<UserEntity>>(){}.getType();
+                        java.lang.reflect.Type type = new TypeToken<ResultBean<User>>(){}.getType();
                         ResultBean bean = gson.fromJson(result, type);
-                        UserEntity user = (UserEntity)bean.data;
-                        Logger.d(user.name);
+                        User user = (User)bean.data;
+                        Logger.d(result+"-----------");
                         if (bean.code == 200){
                             SPUtils.put(getContext(),"patNumber",user.patNumber);
+                            SPUtils.put(getContext(),"isFirst",user.isFirst);
+                            SPUtils.put(getContext(),"identity","350211198302083056");
                             SPUtils.put(getContext(),"isLogin",true);
                         }
                     }
