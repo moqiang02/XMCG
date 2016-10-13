@@ -9,5 +9,7 @@ public final class URL {
     public final static String BASE_URL = "http://cgmh.lnhoo.com/api/";
     public final static String CHECK_LOGIN  = BASE_URL+"ckeckLogin.php";
     public final static String GET_RECORD  = BASE_URL+"getRecord.php";
+    public final static String GET_DEPT_GROUP = BASE_URL+"getDepartmentGroup.php";
+    public final static String GET_DEPT = BASE_URL+"getDepartment.php";
 
 }

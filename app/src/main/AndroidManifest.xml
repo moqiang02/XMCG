@@ -19,7 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.BespeakActivity"></activity>
+        <activity android:name=".activity.BespeakActivity" />
+        <activity android:name=".activity.DepartmentActivity"></activity>
     </application>
 
 </manifest>

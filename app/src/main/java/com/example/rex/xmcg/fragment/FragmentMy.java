@@ -38,7 +38,7 @@ public class FragmentMy extends android.support.v4.app.Fragment {
                 startActivity(new Intent(getContext(),BespeakActivity.class));
                 break;
             case R.id.report:
-                Log.e("hm", "red");
+                Log.e("hm", "red2");
                 break;
         }
     }
