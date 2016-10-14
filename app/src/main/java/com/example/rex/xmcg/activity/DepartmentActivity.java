@@ -1,5 +1,6 @@
 package com.example.rex.xmcg.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -103,12 +104,14 @@ public class DepartmentActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 adapter.setSelectItem(position);
                 adapter.notifyDataSetChanged();
-
+                final LoadingDialog loadingDialog = new LoadingDialog(DepartmentActivity.this);
+                loadingDialog.show();
                 RequestParams params = new RequestParams(URL.GET_DEPT);
                 params.addQueryStringParameter("DeptGroupId", groups.get(position).deptGroupID);
                 x.http().get(params, new Callback.CommonCallback<String>() {
                     @Override
                     public void onSuccess(String result) {
+                        loadingDialog.dismiss();
                         java.lang.reflect.Type type = new TypeToken<ResultBean<DepartmentGroup>>() {
                         }.getType();
                         ResultBean bean = gson.fromJson(result, type);
@@ -124,6 +127,16 @@ public class DepartmentActivity extends AppCompatActivity {
                                     R.id.tv,
                                     deptTexts);
                             son.setAdapter(arrAdapter);
+                            son.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    Intent intent = new Intent();
+                                    intent.putExtra("deptID", departments.get(position).deptID);
+                                    intent.putExtra("deptName", departments.get(position).deptName);
+                                    intent.setClass(DepartmentActivity.this, RegisterListActivity.class);
+                                    startActivity(intent);
+                                }
+                            });
                         }
                     }
 
