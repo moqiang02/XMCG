@@ -23,8 +23,10 @@ import com.example.rex.xmcg.utils.ViewFindUtils;
 import com.example.rex.xmcg.weiget.LoadingDialog;
 import com.example.rex.xmcg.weiget.TitleBar;
 import com.flyco.tablayout.SegmentTabLayout;
+import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.orhanobut.logger.Logger;
 
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
@@ -51,8 +53,10 @@ public class RegisterListActivity extends AppCompatActivity {
     protected GridView gridView;
     @BindView(R.id.date_tips)
     protected TextView date_tips;
-    private String[] mTitles = {"首页", "消息"};
+    private String[] mTitles = {"上午", "下午"};
     private View mDecorView;
+    private String opdBeginDate, opdEndDate, opdTimeID;
+    private SegmentTabLayout tabLayout_1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,19 +75,39 @@ public class RegisterListActivity extends AppCompatActivity {
         date_tips.setText(DateUtils.getYmdwStr());
 
         mDecorView = getWindow().getDecorView();
-        SegmentTabLayout tabLayout_1 = ViewFindUtils.find(mDecorView, R.id.tl_1);
+        tabLayout_1 = ViewFindUtils.find(mDecorView, R.id.tl_1);
         tabLayout_1.setTabData(mTitles);
+        tabLayout_1.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelect(int position) {
+                if (position == 0) {
+                    loadData(deptID, opdBeginDate, opdBeginDate, "1");
+                }else{
+                    loadData(deptID, opdBeginDate, opdBeginDate, "2");
+                }
+            }
 
-        initData();
+            @Override
+            public void onTabReselect(int position) {
+
+            }
+        });
+
+        Intent intent = getIntent();
+        deptID = intent.getStringExtra("deptID");
+        deptName = intent.getStringExtra("deptName");
+        titleBar.setTitle(deptName);
+        String currDate = DateUtils.getYmdStr(System.currentTimeMillis());
+        loadData(deptID, currDate, currDate, "1");
 
         long cuttStamp = System.currentTimeMillis();
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        final List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         for (int i = 0; i < 4; i++) {
-            cuttStamp += 24 * 3600 * 1000;
             Map<String, Object> item = new HashMap<String, Object>();
             item.put("date", DateUtils.getMonDay(cuttStamp));
             item.put("week", DateUtils.getWeek(cuttStamp));
             list.add(item);
+            cuttStamp += 24 * 3600 * 1000;
         }
 
         SimpleAdapter simple = new SimpleAdapter(this, list, R.layout.item_grid_date,
@@ -92,25 +116,37 @@ public class RegisterListActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int postion, long id) {
-                view.setSelected(true);
+                if (postion==0){
+                    gridView.getChildAt(0).setBackgroundResource(R.color.blue);
+                }else {
+                    gridView.getChildAt(0).setBackgroundResource(R.color.white);
+                }
+                gridView.getChildAt(postion).setSelected(true);
+
+                tabLayout_1.setCurrentTab(0);
+                opdBeginDate = opdEndDate = DateUtils.getYmdStr(System.currentTimeMillis() + 24 * 3600 * 1000 * postion);
+                loadData(deptID, opdBeginDate, opdBeginDate, "1");
             }
+        });
+        gridView.post(new Runnable() {
+            @Override
+            public void run() {
+                gridView.performItemClick(gridView.getChildAt(0), 0, gridView.getItemIdAtPosition(0));
+            }
+
         });
     }
 
-    private void initData() {
-        Intent intent = getIntent();
-        deptID = intent.getStringExtra("deptID");
-        deptName = intent.getStringExtra("deptName");
-        titleBar.setTitle(deptName);
-        String currDate = DateUtils.getYmdStr(System.currentTimeMillis());
+    private void loadData(String deptID, String opdBeginDate, String opdEndDate, String opdTimeID) {
+
         final LoadingDialog loadingDialog = new LoadingDialog(this);
         loadingDialog.show();
         RequestParams params = new RequestParams(URL.GET_REGISTER_LIST);
-        params.addQueryStringParameter("opdBeginDate", currDate);
-        params.addQueryStringParameter("opdEndDate", currDate);
+        params.addQueryStringParameter("opdBeginDate", opdBeginDate);
+        params.addQueryStringParameter("opdEndDate", opdEndDate);
         params.addQueryStringParameter("doctorID", "");
         params.addQueryStringParameter("deptID", deptID);
-        params.addQueryStringParameter("opdTimeID", "1");
+        params.addQueryStringParameter("opdTimeID", opdTimeID);
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
@@ -118,6 +154,7 @@ public class RegisterListActivity extends AppCompatActivity {
                 java.lang.reflect.Type type = new TypeToken<ResultBean<Register>>() {
                 }.getType();
                 ResultBean bean = gson.fromJson(result, type);
+                Logger.json(result);
                 registerList = (ArrayList<Register>) bean.dataList;
 
                 if (bean.code == 200) {

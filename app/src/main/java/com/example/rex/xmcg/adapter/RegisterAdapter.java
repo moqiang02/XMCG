@@ -43,7 +43,17 @@ public class RegisterAdapter extends RecyclerView.Adapter<RegisterAdapter.ViewHo
         Register p = list.get(i);
         viewHolder.name.setText(p.doctorName);
         viewHolder.deptname.setText(p.deptName);
-//        viewHolder.status.setText(p.regNumber);
+        if (p.canReg.equals("N")) {
+            viewHolder.status.setText("停诊");
+            viewHolder.status.setBackgroundResource(R.drawable.register_state_gray_bg);
+        } else if (p.isFull.equals("Y")) {
+            viewHolder.status.setText("已满");
+            viewHolder.status.setBackgroundResource(R.drawable.register_state_red_bg);
+        } else {
+            viewHolder.status.setText("有号");
+            viewHolder.status.setBackgroundResource(R.drawable.register_state_green_bg);
+        }
+
     }
 
     @Override

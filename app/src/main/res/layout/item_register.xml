@@ -8,17 +8,21 @@
     android:background="#fff">
 
     <LinearLayout
+        android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
+            android:textStyle="bold"
             android:id="@+id/name"
+            android:textSize="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="name" />
 
         <TextView
+            android:textSize="13dp"
             android:id="@+id/deptname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,8 +35,13 @@
         android:layout_weight="1" />
 
     <TextView
+        android:layout_marginRight="10dp"
         android:id="@+id/status"
+        android:padding="3dp"
+        android:textSize="10dp"
+        android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="name" />
+        android:background="@drawable/register_state_green_bg"
+        android:text="有号" />
 </LinearLayout>
