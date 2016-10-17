@@ -28,6 +28,7 @@ import com.flyco.tablayout.SegmentTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -102,7 +103,6 @@ public class RegisterListActivity extends AppCompatActivity {
 
             }
         });
-
         Intent intent = getIntent();
         deptID = intent.getStringExtra("deptID");
         deptName = intent.getStringExtra("deptName");
@@ -145,6 +145,13 @@ public class RegisterListActivity extends AppCompatActivity {
             }
 
         });
+        gridView.post(new Runnable() {
+            @Override
+            public void run() {
+                gridView.performItemClick(gridView.getChildAt(0), 0, gridView.getItemIdAtPosition(0));
+            }
+
+        });
     }
 
     private void loadData(String deptID, String opdBeginDate, String opdEndDate, String opdTimeID) {
@@ -164,7 +171,6 @@ public class RegisterListActivity extends AppCompatActivity {
                 java.lang.reflect.Type type = new TypeToken<ResultBean<Doctor>>() {
                 }.getType();
                 ResultBean bean = gson.fromJson(result, type);
-//                Logger.json(result);
                 doctorList = (ArrayList<Doctor>) bean.dataList;
 
                 if (bean.code == 200) {
