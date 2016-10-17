@@ -45,13 +45,12 @@ public class DateUtils {
     }
 
     /**
-     * 获取时间戳（年月日）
+     * 获取（年月日）
      */
     public static String getYmdStr(long time) {
         SimpleDateFormat monthDayTimeFormat = new SimpleDateFormat("yyyyMMdd");
         Date date = new Date(time);
         String strTime = monthDayTimeFormat.format(date);
-        date = null;
         return strTime;
     }
 

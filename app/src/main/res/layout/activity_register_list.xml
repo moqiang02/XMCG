@@ -39,6 +39,7 @@
             android:verticalSpacing="1pt" />
 
         <ImageView
+            android:id="@+id/go_date"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
