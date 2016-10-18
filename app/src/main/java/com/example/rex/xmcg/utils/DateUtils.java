@@ -32,8 +32,8 @@ public class DateUtils {
     /**
      * 获取时间戳（年月日）
      */
-    public static long formatYearStamp(String time) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    public static long formatStamp(String time) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         long timeStemp = 0;
         try {
             Date date = simpleDateFormat.parse(time);
@@ -43,6 +43,22 @@ public class DateUtils {
         }
         return timeStemp;
     }
+
+
+    //把yyyymmdd转成yyyy-MM-dd格式
+    public static String formatDate(String str) {
+        SimpleDateFormat sf1 = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat sf2 = new SimpleDateFormat("yyyy-MM-dd");
+        String sfstr = "";
+        try {
+            sfstr = sf2.format(sf1.parse(str));
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return sfstr;
+    }
+
 
     /**
      * 获取（年月日）
@@ -55,55 +71,55 @@ public class DateUtils {
     }
 
     //获取当前时间与星期几
-    public static String getYmdwStr(){
-        String mYear,mMonth,mDay,mWay;
+    public static String getYmdwStr() {
+        String mYear, mMonth, mDay, mWay;
         final Calendar c = Calendar.getInstance();
         c.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
         mYear = String.valueOf(c.get(Calendar.YEAR)); // 获取当前年份
         mMonth = String.valueOf(c.get(Calendar.MONTH) + 1);// 获取当前月份
         mDay = String.valueOf(c.get(Calendar.DAY_OF_MONTH));// 获取当前月份的日期号码
         mWay = String.valueOf(c.get(Calendar.DAY_OF_WEEK));
-        if("1".equals(mWay)){
-            mWay ="天";
-        }else if("2".equals(mWay)){
-            mWay ="一";
-        }else if("3".equals(mWay)){
-            mWay ="二";
-        }else if("4".equals(mWay)){
-            mWay ="三";
-        }else if("5".equals(mWay)){
-            mWay ="四";
-        }else if("6".equals(mWay)){
-            mWay ="五";
-        }else if("7".equals(mWay)){
-            mWay ="六";
+        if ("1".equals(mWay)) {
+            mWay = "天";
+        } else if ("2".equals(mWay)) {
+            mWay = "一";
+        } else if ("3".equals(mWay)) {
+            mWay = "二";
+        } else if ("4".equals(mWay)) {
+            mWay = "三";
+        } else if ("5".equals(mWay)) {
+            mWay = "四";
+        } else if ("6".equals(mWay)) {
+            mWay = "五";
+        } else if ("7".equals(mWay)) {
+            mWay = "六";
         }
-        return mYear + "年" + mMonth + "月" + mDay+"日"+"/星期"+mWay;
+        return mYear + "年" + mMonth + "月" + mDay + "日" + "/星期" + mWay;
     }
 
     //获取星期几
-    public static String getWeek(long time){
+    public static String getWeek(long time) {
         String mWay;
         final Calendar c = Calendar.getInstance();
         c.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
         c.setTimeInMillis(time);
         mWay = String.valueOf(c.get(Calendar.DAY_OF_WEEK));
-        if("1".equals(mWay)){
-            mWay ="天";
-        }else if("2".equals(mWay)){
-            mWay ="一";
-        }else if("3".equals(mWay)){
-            mWay ="二";
-        }else if("4".equals(mWay)){
-            mWay ="三";
-        }else if("5".equals(mWay)){
-            mWay ="四";
-        }else if("6".equals(mWay)){
-            mWay ="五";
-        }else if("7".equals(mWay)){
-            mWay ="六";
+        if ("1".equals(mWay)) {
+            mWay = "天";
+        } else if ("2".equals(mWay)) {
+            mWay = "一";
+        } else if ("3".equals(mWay)) {
+            mWay = "二";
+        } else if ("4".equals(mWay)) {
+            mWay = "三";
+        } else if ("5".equals(mWay)) {
+            mWay = "四";
+        } else if ("6".equals(mWay)) {
+            mWay = "五";
+        } else if ("7".equals(mWay)) {
+            mWay = "六";
         }
-        return "星期"+mWay;
+        return "星期" + mWay;
     }
 
     /**
