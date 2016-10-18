@@ -22,7 +22,7 @@
             android:src="@mipmap/bg_circle" />
 
         <ImageView
-            android:layout_width="50dp"
+            android:layout_width="40dp"
             android:layout_height="50dp"
             android:layout_centerInParent="true"
             android:layout_marginTop="60dp"
@@ -67,6 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@null"
+            android:textSize="16dp"
             android:hint="姓名" />
     </LinearLayout>
 
@@ -97,6 +98,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@null"
+            android:textSize="16dp"
+            android:inputType="number"
             android:hint="身份证" />
     </LinearLayout>
 
@@ -127,6 +130,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@null"
+            android:textSize="16dp"
+            android:inputType="number"
             android:hint="手机号码" />
     </LinearLayout>
 
@@ -145,6 +150,7 @@
             android:layout_height="40dp"
             android:layout_weight="3"
             android:background="@drawable/text_bg"
+            android:textSize="16dp"
             android:hint="手机验证码"
             android:paddingLeft="10dp" />
 

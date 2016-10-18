@@ -6,56 +6,6 @@
     android:background="#fff"
     android:layout_marginTop="6dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:text="距离就诊还有"
-            android:textSize="18dp" />
-
-        <TextView
-            android:id="@+id/day"
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1天"
-            android:textColor="@color/text_orange"
-            android:textSize="18dp" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/cancle"
-            android:layout_width="50dp"
-            android:layout_height="30dp"
-            android:layout_margin="10dp"
-            android:textColor="@color/deep_gray"
-            android:background="@drawable/button_white"
-            android:text="取消" />
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="15dp"
-        android:text="已超过退约时间，如需退约，请致电13222"
-        android:textSize="15dp"
-        android:visibility="gone" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dip"
-        android:background="@color/line_gray" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -128,14 +78,6 @@
             android:text="12"
             android:textSize="15dp" />
 
-        <TextView
-            android:id="@+id/status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/xuhao"
-            android:layout_toRightOf="@+id/cost"
-            android:text="未付款"
-            android:textSize="15dp" />
     </RelativeLayout>
 
     <View

@@ -5,12 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.rex.xmcg.R;
 import com.example.rex.xmcg.model.Vis;
-import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
@@ -21,59 +19,33 @@ import butterknife.ButterKnife;
  * Created by Rex on 2016/10/11.
  */
 
-public class VisAdapter extends RecyclerView.Adapter<VisAdapter.ViewHolder> implements View.OnClickListener {
+public class VisOldAdapter extends RecyclerView.Adapter<VisOldAdapter.ViewHolder> {
 
     private List<Vis> vises;
-    private Context mContext;
-    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
-    public VisAdapter(Context context, List<Vis> vises) {
+    private Context mContext;
+
+    public VisOldAdapter(Context context, List<Vis> vises) {
         this.mContext = context;
         this.vises = vises;
-    }
-
-    public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
-        this.mOnItemClickListener = listener;
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (mOnItemClickListener != null) {
-            Vis s =(Vis) v.getTag();
-            Logger.d(s.deptName);
-            //注意这里使用getTag方法获取数据
-            mOnItemClickListener.onItemClick(v, (Vis) v.getTag());
-        }
-    }
-
-    //define interface
-    public static interface OnRecyclerViewItemClickListener {
-        void onItemClick(View view, Vis data);
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         // 给ViewHolder设置布局文件
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_vis, viewGroup, false);//将创建的View注册点击事件
-        ViewHolder vh = new ViewHolder(v);
-        //将创建的View注册点击事件
-        v.setOnClickListener(this);
-        return vh;
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_vis_old, viewGroup, false);
+        return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         // 给ViewHolder设置元素
         Vis p = vises.get(i);
-        viewHolder.day.setText(p.day + "天");
         viewHolder.name.setText(p.doctorName);
         viewHolder.department.setText(p.deptName);
         viewHolder.num.setText(p.regNumber);
         viewHolder.person.setText(p.name);
-        viewHolder.time.setText(p.opdDate + " " + p.estiTime);
-
-        //将数据保存在itemView的Tag中，以便点击时进行获取
-        viewHolder.itemView.setTag(p);
+        viewHolder.time.setText(p.opdDate + " "+p.estiTime);
     }
 
     @Override
@@ -84,8 +56,6 @@ public class VisAdapter extends RecyclerView.Adapter<VisAdapter.ViewHolder> impl
 
     // 重写的自定义ViewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.day)
-        TextView day;
         @BindView(R.id.name)
         TextView name;
         @BindView(R.id.department)
@@ -96,8 +66,6 @@ public class VisAdapter extends RecyclerView.Adapter<VisAdapter.ViewHolder> impl
         TextView person;
         @BindView(R.id.time)
         TextView time;
-        @BindView(R.id.cancle)
-        Button cancle;
 
         public ViewHolder(View v) {
             super(v);

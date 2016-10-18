@@ -18,11 +18,11 @@
             android:layout_marginTop="10dp"
             android:text="我的"
             android:textColor="#fff"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_alignParentRight="true"
             android:layout_centerHorizontal="true"
             android:layout_marginRight="20dp"
@@ -47,7 +47,7 @@
             android:layout_marginTop="10dp"
             android:text="小龙"
             android:textColor="#fff"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
     </RelativeLayout>
 
     <LinearLayout
@@ -76,9 +76,10 @@
             android:layout_weight="1" />
 
         <Button
-            android:layout_width="40dp"
+            android:layout_width="50dp"
             android:layout_height="30dp"
             android:layout_margin="10dp"
+            android:textColor="@color/deep_gray"
             android:background="@drawable/button_white"
             android:text="充值" />
     </LinearLayout>
@@ -171,7 +172,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="我的预约"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="0dp"
@@ -211,7 +212,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="检查报告"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="0dp"
@@ -250,7 +251,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="在线缴费"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="0dp"
@@ -290,7 +291,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="我的评论"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="0dp"
@@ -329,7 +330,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="服务指南"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="0dp"
@@ -368,7 +369,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:text="账户设置"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="0dp"

@@ -28,7 +28,6 @@ import com.flyco.tablayout.SegmentTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -108,7 +107,7 @@ public class RegisterListActivity extends AppCompatActivity {
         deptName = intent.getStringExtra("deptName");
         titleBar.setTitle(deptName);
         String currDate = DateUtils.getYmdStr(System.currentTimeMillis());
-        loadData(deptID, currDate, currDate, "1");
+//        loadData(deptID, currDate, currDate, "1");
 
         long cuttStamp = System.currentTimeMillis();
         dateList = new ArrayList<Map<String, Object>>();
@@ -126,24 +125,11 @@ public class RegisterListActivity extends AppCompatActivity {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int postion, long id) {
-                if (postion == 0) {
-                    gridView.getChildAt(0).setBackgroundResource(R.color.blue);
-                } else {
-                    gridView.getChildAt(0).setBackgroundResource(R.color.white);
-                    loadData(deptID, opdBeginDate, opdBeginDate, "1");
-                }
-                gridView.getChildAt(postion).setSelected(true);
-
-                tabLayout_1.setCurrentTab(0);
                 opdBeginDate = opdEndDate = DateUtils.getYmdStr(System.currentTimeMillis() + 24 * 3600 * 1000 * postion);
+                loadData(deptID, opdBeginDate, opdBeginDate, "1");
+                gridView.getChildAt(postion).setSelected(true);
+                tabLayout_1.setCurrentTab(0);
             }
-        });
-        gridView.post(new Runnable() {
-            @Override
-            public void run() {
-                gridView.performItemClick(gridView.getChildAt(0), 0, gridView.getItemIdAtPosition(0));
-            }
-
         });
         gridView.post(new Runnable() {
             @Override
@@ -154,7 +140,7 @@ public class RegisterListActivity extends AppCompatActivity {
         });
     }
 
-    private void loadData(String deptID, String opdBeginDate, String opdEndDate, String opdTimeID) {
+    private void loadData(String deptID, final String opdBeginDate, String opdEndDate, final String opdTimeID) {
 
         final LoadingDialog loadingDialog = new LoadingDialog(this);
         loadingDialog.show();
@@ -181,14 +167,16 @@ public class RegisterListActivity extends AppCompatActivity {
                     mRecyclerView.setHasFixedSize(true);
                     // 初始化自定义的适配器
                     adapter = new RegisterAdapter(x.app(), doctorList);
-                    adapter.setOnItemClickListener(new RegisterAdapter.OnRecyclerViewItemClickListener(){
+                    adapter.setOnItemClickListener(new RegisterAdapter.OnRecyclerViewItemClickListener() {
                         @Override
-                        public void onItemClick(View view , Doctor doctor){
+                        public void onItemClick(View view, Doctor doctor) {
 //                            Logger.d(doctor.doctorName);
-                            if (!doctor.isFull.equals("Y") && doctor.canReg.equals("Y")){
-                                Intent mIntent = new Intent(RegisterListActivity.this,RegisterActivity.class);
+                            if (!doctor.isFull.equals("Y") && doctor.canReg.equals("Y")) {
+                                Intent mIntent = new Intent(RegisterListActivity.this, RegisterActivity.class);
                                 Bundle mBundle = new Bundle();
                                 mBundle.putSerializable("doctor", doctor);
+                                mBundle.putString("opdBeginDate", opdBeginDate);
+                                mBundle.putString("opdTimeID", opdTimeID);
                                 mIntent.putExtras(mBundle);
                                 startActivity(mIntent);
                             }
@@ -222,10 +210,10 @@ public class RegisterListActivity extends AppCompatActivity {
         c.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
         int mYear, curr_month, next_month, start_day, end_day;
         mYear = c.get(Calendar.YEAR); // 获取当前年份
-        curr_month = c.get(Calendar.MONTH) ;// 获取当前月份
+        curr_month = c.get(Calendar.MONTH);// 获取当前月份
         start_day = c.get(Calendar.DAY_OF_MONTH);// 获取当前月份的日期号码
         c.setTimeInMillis(System.currentTimeMillis() + 24 * 3600 * 1000 * 14);//14天后
-        next_month = c.get(Calendar.MONTH) ;
+        next_month = c.get(Calendar.MONTH);
         end_day = c.get(Calendar.DAY_OF_MONTH);
         new CalendarDialogFragment(curr_month, next_month, start_day, end_day).show(getSupportFragmentManager(), "test-calendar");
     }
@@ -248,7 +236,7 @@ public class RegisterListActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);//反注册EventBus
     }
