@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_about"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.rex.xmcg.activity.AboutActivity">
+    <com.example.rex.xmcg.weiget.TitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <com.flyco.tablayout.SlidingTabLayout
+        android:id="@+id/tl_4"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#009688"
+        tl:tl_tab_padding="0dp"
+        tl:tl_tab_width="95dp"
+        tl:tl_textsize="15sp"/>
+</LinearLayout>

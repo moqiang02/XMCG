@@ -82,7 +82,7 @@ public class FragmentVis extends android.support.v4.app.Fragment {
                         @Override
                         public void onItemClick(View view, Vis vis) {
                             cancelRegister((String) SPUtils.get(getContext(), "patNumber", ""), (String) SPUtils.get(getContext(), "identity", ""),
-                                    vis.opdDate, vis.deptID, vis.opdTimeID, CommonUtils.getIPAddress(getContext()));
+                                    vis.opdDate, vis.deptID, vis.opdTimeID,vis.doctorID, CommonUtils.getIPAddress(getContext()));
                         }
 
                     });
@@ -117,7 +117,7 @@ public class FragmentVis extends android.support.v4.app.Fragment {
     }
 
 
-    private void cancelRegister(String patNumber, String identity, final String opdDate, final String deptID, final String opdTimeID, String ip) {
+    private void cancelRegister(String patNumber, String identity, final String opdDate, final String deptID, final String opdTimeID, final String doctorID, String ip) {
         final LoadingDialog loadingDialog = new LoadingDialog(getContext());
         loadingDialog.show();
         RequestParams params = new RequestParams(URL.CANCEL_REGISTER);
@@ -126,6 +126,7 @@ public class FragmentVis extends android.support.v4.app.Fragment {
         params.addQueryStringParameter("opdDate", DateUtils.formatDate2(opdDate));
         params.addQueryStringParameter("deptID", deptID);
         params.addQueryStringParameter("opdTimeID", opdTimeID);
+        params.addQueryStringParameter("doctorID", doctorID);
         params.addQueryStringParameter("IP", ip);
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
@@ -140,7 +141,7 @@ public class FragmentVis extends android.support.v4.app.Fragment {
                     Iterator<Vis> stuIter = listVis.iterator();
                     while (stuIter.hasNext()) {
                         Vis v = stuIter.next();
-                        if (v.opdDate.equals(opdDate) && v.opdTimeID.equals(opdTimeID) && v.deptID.equals(deptID))
+                        if (v.opdDate.equals(opdDate) && v.opdTimeID.equals(opdTimeID) && v.doctorID.equals(doctorID))
                             stuIter.remove();//这里要使用Iterator的remove方法移除当前对象，如果使用List的remove方法，则同样会出现ConcurrentModificationException
                     }
                     adapter.notifyDataSetChanged();

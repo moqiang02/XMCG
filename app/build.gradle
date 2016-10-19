@@ -47,4 +47,5 @@ dependencies {
     compile 'com.prolificinteractive:material-calendarview:1.4.2'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'org.greenrobot:greendao:3.0.1'
+    compile 'com.android.support:percent:22.2.0'
 }

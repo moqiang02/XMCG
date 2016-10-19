@@ -23,6 +23,7 @@ import com.flyco.tablayout.listener.OnTabSelectListener;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+    private View mDecorView;
     private CommonTabLayout mTabLayout;
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private String[] mTitles = {"首页", "健康", "医院", "我的"};
@@ -33,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
             R.mipmap.tab_home_select, R.mipmap.tab_health_select,
             R.mipmap.tab_hospital_select, R.mipmap.tab_my_select};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
-    private View mDecorView;
 
 
     @Override
