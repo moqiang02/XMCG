@@ -59,6 +59,19 @@ public class DateUtils {
         return sfstr;
     }
 
+    //把yyyy-MM-dd转成yyyymmdd格式
+    public static String formatDate2(String str) {
+        SimpleDateFormat sf1 = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat sf2 = new SimpleDateFormat("yyyy-MM-dd");
+        String sfstr = "";
+        try {
+            sfstr = sf1.format(sf2.parse(str));
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return sfstr;
+    }
 
     /**
      * 获取（年月日）

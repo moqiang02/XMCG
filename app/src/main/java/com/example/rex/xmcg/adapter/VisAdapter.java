@@ -10,18 +10,18 @@ import android.widget.TextView;
 
 import com.example.rex.xmcg.R;
 import com.example.rex.xmcg.model.Vis;
-import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Rex on 2016/10/11.
  */
 
-public class VisAdapter extends RecyclerView.Adapter<VisAdapter.ViewHolder> implements View.OnClickListener {
+public class VisAdapter extends RecyclerView.Adapter<VisAdapter.ViewHolder> {
 
     private List<Vis> vises;
     private Context mContext;
@@ -36,15 +36,6 @@ public class VisAdapter extends RecyclerView.Adapter<VisAdapter.ViewHolder> impl
         this.mOnItemClickListener = listener;
     }
 
-    @Override
-    public void onClick(View v) {
-        if (mOnItemClickListener != null) {
-            Vis s =(Vis) v.getTag();
-            Logger.d(s.deptName);
-            //注意这里使用getTag方法获取数据
-            mOnItemClickListener.onItemClick(v, (Vis) v.getTag());
-        }
-    }
 
     //define interface
     public static interface OnRecyclerViewItemClickListener {
@@ -56,8 +47,6 @@ public class VisAdapter extends RecyclerView.Adapter<VisAdapter.ViewHolder> impl
         // 给ViewHolder设置布局文件
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_vis, viewGroup, false);//将创建的View注册点击事件
         ViewHolder vh = new ViewHolder(v);
-        //将创建的View注册点击事件
-        v.setOnClickListener(this);
         return vh;
     }
 
@@ -73,7 +62,7 @@ public class VisAdapter extends RecyclerView.Adapter<VisAdapter.ViewHolder> impl
         viewHolder.time.setText(p.opdDate + " " + p.estiTime);
 
         //将数据保存在itemView的Tag中，以便点击时进行获取
-        viewHolder.itemView.setTag(p);
+        viewHolder.cancle.setTag(p);
     }
 
     @Override
@@ -83,7 +72,7 @@ public class VisAdapter extends RecyclerView.Adapter<VisAdapter.ViewHolder> impl
     }
 
     // 重写的自定义ViewHolder
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.day)
         TextView day;
         @BindView(R.id.name)
@@ -102,6 +91,16 @@ public class VisAdapter extends RecyclerView.Adapter<VisAdapter.ViewHolder> impl
         public ViewHolder(View v) {
             super(v);
             ButterKnife.bind(this, v);
+        }
+
+
+        @OnClick(R.id.cancle)
+        public void cancle(View v) {
+            if (mOnItemClickListener != null) {
+                //注意这里使用getTag方法获取数据
+                mOnItemClickListener.onItemClick(v, (Vis) v.getTag());
+            }
+
         }
     }
 }

@@ -12,4 +12,5 @@ public final class URL {
     public final static String GET_DEPT_GROUP = BASE_URL+"getDepartmentGroup.php";
     public final static String GET_DEPT = BASE_URL+"getDepartment.php";
     public static final java.lang.String GET_REGISTER_LIST = BASE_URL+"getRegisterList.php";
+    public static final java.lang.String CANCEL_REGISTER = BASE_URL+"cancelRegister.php";
 }
