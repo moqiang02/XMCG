@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    android:background="@mipmap/about_bg"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp">
+
+        <LinearLayout
+            android:id="@+id/profiles"
+            android:layout_width="205dp"
+            android:layout_height="140dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:background="#006599"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@mipmap/log_head" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-10dp"
+                android:text="长庚医院简介"
+                android:textColor="@color/white"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/message"
+            android:layout_width="100dp"
+            android:layout_height="140dp"
+            android:layout_toRightOf="@+id/profiles"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/message" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="最新消息" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/event"
+            android:layout_width="100dp"
+            android:layout_height="65dp"
+            android:layout_below="@+id/profiles"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="大事纪" />
+
+        <TextView
+            android:id="@+id/purpose"
+            android:layout_width="100dp"
+            android:layout_height="65dp"
+            android:layout_below="@+id/profiles"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toRightOf="@+id/event"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="创院宗旨" />
+
+        <LinearLayout
+            android:id="@+id/traffic"
+            android:layout_width="100dp"
+            android:layout_height="135dp"
+            android:layout_below="@+id/profiles"
+            android:layout_toRightOf="@+id/purpose"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/traffic" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="位置交通" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/feature"
+            android:layout_width="100dp"
+            android:layout_height="65dp"
+            android:layout_below="@+id/event"
+            android:layout_marginRight="5dp"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="本院特色" />
+
+        <TextView
+            android:id="@+id/presence"
+            android:layout_width="100dp"
+            android:layout_height="65dp"
+            android:layout_below="@+id/event"
+            android:layout_toRightOf="@+id/feature"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="院区风采" />
+    </RelativeLayout>
+</LinearLayout>

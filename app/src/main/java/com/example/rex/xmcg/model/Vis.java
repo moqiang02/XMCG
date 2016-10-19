@@ -12,6 +12,7 @@ public class Vis {
     public String deptName;
     public String regNumber;
     public String calledNumber;
+    public String doctorID;
     public String name;
     public String estiTime;
     public String opdDate;
