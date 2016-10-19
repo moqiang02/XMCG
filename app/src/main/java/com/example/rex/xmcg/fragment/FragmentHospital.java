@@ -13,6 +13,7 @@ import com.example.rex.xmcg.activity.AboutActivity;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+
 /**
  * Created by Rex on 2016/10/7.
  */
