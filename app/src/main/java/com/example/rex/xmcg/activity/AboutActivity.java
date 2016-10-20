@@ -7,14 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.rex.xmcg.R;
+import com.example.rex.xmcg.adapter.MyPagerAdapter;
 import com.example.rex.xmcg.fragment.FragmentHealth;
 import com.example.rex.xmcg.fragment.FragmentHome;
 import com.example.rex.xmcg.fragment.FragmentHospital;
-import com.example.rex.xmcg.fragment.FragmentLogin;
 import com.example.rex.xmcg.fragment.FragmentMy;
 import com.example.rex.xmcg.utils.ViewFindUtils;
 import com.example.rex.xmcg.weiget.TitleBar;
-import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.SlidingTabLayout;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ import butterknife.ButterKnife;
 
 public class AboutActivity extends AppCompatActivity {
     private View mDecorView;
-    private CommonTabLayout mTabLayout;private MyPagerAdapter mAdapter;
+    private MyPagerAdapter mAdapter;
     private ArrayList<Fragment> mFragments = new ArrayList<>();
     private String[] mTitles = {"首页", "健康", "医院", "我的"};
     private SlidingTabLayout tabLayout_4;
@@ -47,15 +46,16 @@ public class AboutActivity extends AppCompatActivity {
         titleBar.setTitle("关于长庚");
 
 
-        mDecorView = getWindow().getDecorView();        ViewPager vp = ViewFindUtils.find(decorView, R.id.vp);
-        mAdapter = new MyPagerAdapter(getSupportFragmentManager());
-        vp.setAdapter(mAdapter);
+        mDecorView = getWindow().getDecorView();
         mFragments.add(new FragmentHome());
         mFragments.add(new FragmentHealth());
         mFragments.add(new FragmentHospital());
         mFragments.add(new FragmentMy());
-        mFragments.add(new FragmentLogin());
-        SlidingTabLayout tabLayout_4 = ViewFindUtils.find(mDecorView, R.id.tl_4);
+        ViewPager vp = ViewFindUtils.find(mDecorView, R.id.vp);
+        mAdapter = new MyPagerAdapter(getSupportFragmentManager(), mFragments, mTitles);
+        vp.setAdapter(mAdapter);
+        tabLayout_4 = ViewFindUtils.find(mDecorView, R.id.tl_4);
         tabLayout_4.setViewPager(vp);
+        vp.setCurrentItem(0);
     }
 }

@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.flyco.tablayout.CommonTabLayout
+    <com.flyco.tablayout.SlidingTabLayout
         android:id="@+id/tl_4"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -21,10 +21,11 @@
         tl:tl_indicator_color="#2C97DE"
         tl:tl_indicator_height="2dp"
         tl:tl_textBold="SELECT"
+        tl:tl_tab_space_equal="true"
         tl:tl_textsize="14sp" />
 
-    <FrameLayout
-        android:id="@+id/fl_change"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></FrameLayout>
+        android:layout_height="wrap_content"/>
 </LinearLayout>
