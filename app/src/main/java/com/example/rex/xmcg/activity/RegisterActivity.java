@@ -96,6 +96,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     @OnClick(R.id.edit_user)
     protected void editUser(View v){
-
+        startActivity(new Intent(this,ManagerUser.class));
     }
 }

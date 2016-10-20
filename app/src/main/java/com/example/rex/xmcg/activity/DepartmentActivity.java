@@ -60,13 +60,13 @@ public class DepartmentActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        final LoadingDialog loadingDialog = new LoadingDialog(this);
-        loadingDialog.show();
+//        final LoadingDialog loadingDialog = new LoadingDialog(this);
+//        loadingDialog.show();
         RequestParams params = new RequestParams(URL.GET_DEPT_GROUP);
         x.http().get(params, new Callback.CommonCallback<String>() {
             @Override
             public void onSuccess(String result) {
-                loadingDialog.dismiss();
+//                loadingDialog.dismiss();
                 java.lang.reflect.Type type = new TypeToken<ResultBean<DepartmentGroup>>() {
                 }.getType();
                 ResultBean bean = gson.fromJson(result, type);
@@ -83,7 +83,6 @@ public class DepartmentActivity extends AppCompatActivity {
             @Override
             public void onError(Throwable ex, boolean isOnCallback) {
                 Toast.makeText(x.app(), ex.getMessage(), Toast.LENGTH_LONG).show();
-                loadingDialog.dismiss();
             }
 
             @Override
