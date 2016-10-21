@@ -11,30 +11,25 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.rex.xmcg.R;
 import com.example.rex.xmcg.URL;
 import com.example.rex.xmcg.adapter.RegisterAdapter;
+import com.example.rex.xmcg.callback.DialogCallback;
 import com.example.rex.xmcg.fragment.CalendarDialogFragment;
 import com.example.rex.xmcg.model.Doctor;
 import com.example.rex.xmcg.model.EventType;
-import com.example.rex.xmcg.model.ResultBean;
+import com.example.rex.xmcg.model.LzyResponse;
 import com.example.rex.xmcg.utils.DateUtils;
 import com.example.rex.xmcg.utils.ViewFindUtils;
-import com.example.rex.xmcg.weiget.LoadingDialog;
 import com.example.rex.xmcg.weiget.TitleBar;
 import com.flyco.tablayout.SegmentTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.lzy.okgo.OkGo;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-import org.xutils.common.Callback;
-import org.xutils.http.RequestParams;
-import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -47,10 +42,11 @@ import java.util.TimeZone;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Response;
 
 public class RegisterListActivity extends AppCompatActivity {
     private String deptID, deptName;
-    private Gson gson = new Gson();
     private ArrayList<Doctor> doctorList;
     private RegisterAdapter adapter;
     @BindView(R.id.list)
@@ -142,66 +138,49 @@ public class RegisterListActivity extends AppCompatActivity {
 
     private void loadData(String deptID, final String opdBeginDate, String opdEndDate, final String opdTimeID) {
 
-        final LoadingDialog loadingDialog = new LoadingDialog(this);
-        loadingDialog.show();
-        RequestParams params = new RequestParams(URL.GET_REGISTER_LIST);
-        params.addQueryStringParameter("opdBeginDate", opdBeginDate);
-        params.addQueryStringParameter("opdEndDate", opdEndDate);
-        params.addQueryStringParameter("doctorID", "");
-        params.addQueryStringParameter("deptID", deptID);
-        params.addQueryStringParameter("opdTimeID", opdTimeID);
-        x.http().get(params, new Callback.CommonCallback<String>() {
-            @Override
-            public void onSuccess(String result) {
-                loadingDialog.dismiss();
-                java.lang.reflect.Type type = new TypeToken<ResultBean<Doctor>>() {
-                }.getType();
-                ResultBean bean = gson.fromJson(result, type);
-                doctorList = (ArrayList<Doctor>) bean.dataList;
+        OkGo.post(URL.GET_REGISTER_LIST)
+                .tag(this)
+                .params("opdBeginDate", opdBeginDate)
+                .params("opdEndDate", opdEndDate)
+                .params("doctorID", "")
+                .params("deptID", deptID)
+                .params("opdTimeID", opdTimeID)
+                .execute(new DialogCallback<LzyResponse<List<Doctor>>>(this) {
 
-                if (bean.code == 200) {
-                    mRecyclerView.setLayoutManager(new LinearLayoutManager(x.app()));
-                    // 设置ItemAnimator
-                    mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-                    // 设置固定大小
-                    mRecyclerView.setHasFixedSize(true);
-                    // 初始化自定义的适配器
-                    adapter = new RegisterAdapter(x.app(), doctorList);
-                    adapter.setOnItemClickListener(new RegisterAdapter.OnRecyclerViewItemClickListener() {
-                        @Override
-                        public void onItemClick(View view, Doctor doctor) {
+                    @Override
+                    public void onSuccess(LzyResponse<List<Doctor>> responseData, Call call, Response response) {
+                        doctorList = (ArrayList<Doctor>) responseData.data;
+                        mRecyclerView.setLayoutManager(new LinearLayoutManager(RegisterListActivity.this));
+                        // 设置ItemAnimator
+                        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                        // 设置固定大小
+                        mRecyclerView.setHasFixedSize(true);
+                        // 初始化自定义的适配器
+                        adapter = new RegisterAdapter(RegisterListActivity.this, doctorList);
+                        adapter.setOnItemClickListener(new RegisterAdapter.OnRecyclerViewItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, Doctor doctor) {
 //                            Logger.d(doctor.doctorName);
-                            if (!doctor.isFull.equals("Y") && doctor.canReg.equals("Y")) {
-                                Intent mIntent = new Intent(RegisterListActivity.this, RegisterActivity.class);
-                                Bundle mBundle = new Bundle();
-                                mBundle.putSerializable("doctor", doctor);
-                                mBundle.putString("opdBeginDate", opdBeginDate);
-                                mBundle.putString("opdTimeID", opdTimeID);
-                                mIntent.putExtras(mBundle);
-                                startActivity(mIntent);
+                                if (!doctor.isFull.equals("Y") && doctor.canReg.equals("Y")) {
+                                    Intent mIntent = new Intent(RegisterListActivity.this, RegisterActivity.class);
+                                    Bundle mBundle = new Bundle();
+                                    mBundle.putSerializable("doctor", doctor);
+                                    mBundle.putString("opdBeginDate", opdBeginDate);
+                                    mBundle.putString("opdTimeID", opdTimeID);
+                                    mIntent.putExtras(mBundle);
+                                    startActivity(mIntent);
+                                }
                             }
-                        }
-                    });
-                    // 为mRecyclerView设置适配器
-                    mRecyclerView.setAdapter(adapter);
-                }
-            }
+                        });
+                        // 为mRecyclerView设置适配器
+                        mRecyclerView.setAdapter(adapter);
+                    }
 
-            @Override
-            public void onError(Throwable ex, boolean isOnCallback) {
-                Toast.makeText(x.app(), ex.getMessage(), Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onCancelled(CancelledException cex) {
-                Toast.makeText(x.app(), "cancelled", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onFinished() {
-
-            }
-        });
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                    }
+                });
     }
 
     @OnClick(R.id.go_date)
