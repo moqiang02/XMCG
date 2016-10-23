@@ -14,6 +14,7 @@ import com.example.rex.xmcg.MyApplication;
 import com.example.rex.xmcg.R;
 import com.example.rex.xmcg.URL;
 import com.example.rex.xmcg.callback.DialogCallback;
+import com.example.rex.xmcg.model.EventType;
 import com.example.rex.xmcg.model.LzyResponse;
 import com.example.rex.xmcg.model.User;
 import com.example.rex.xmcg.utils.CommonUtils;
@@ -21,6 +22,8 @@ import com.example.rex.xmcg.utils.SPUtils;
 import com.example.rex.xmcg.utils.TUtils;
 import com.lzy.okgo.OkGo;
 import com.orhanobut.logger.Logger;
+
+import org.greenrobot.eventbus.EventBus;
 
 import okhttp3.Call;
 import okhttp3.Response;
@@ -106,6 +109,8 @@ public class FragmentLogin extends android.support.v4.app.Fragment implements Vi
                                         user.idNumber,user.isFirst,user.memo);
                                 UserGDao userDao = MyApplication.getInstances().getDaoSession().getUserGDao();
                                 userDao.insert(mUser);//添加一个
+
+                                EventBus.getDefault().post(new EventType.Frag());
                             }
 
                             @Override

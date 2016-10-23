@@ -13,12 +13,17 @@ import com.example.rex.xmcg.fragment.FragmentHome;
 import com.example.rex.xmcg.fragment.FragmentHospital;
 import com.example.rex.xmcg.fragment.FragmentLogin;
 import com.example.rex.xmcg.fragment.FragmentMy;
+import com.example.rex.xmcg.model.EventType;
 import com.example.rex.xmcg.model.Tab;
 import com.example.rex.xmcg.utils.SPUtils;
 import com.example.rex.xmcg.utils.ViewFindUtils;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -40,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        EventBus.getDefault().register(this);
         for (int i = 0; i < mTitles.length; i++) {
             mTabEntities.add(new Tab(mTitles[i], mIconSelectIds[i], mIconUnselectIds[i]));
         }
@@ -76,5 +82,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onUIThread(EventType.Frag event) {
+        FragmentManager mFragmentManager = getSupportFragmentManager();
+        FragmentTransaction ft = mFragmentManager.beginTransaction();
+        ft.hide(mFragments.get(4));
+        ft.show(mFragments.get(3));
+        ft.commit();
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);//反注册EventBus
+    }
 }

@@ -17,6 +17,7 @@ import com.example.rex.xmcg.model.LzyResponse;
 import com.example.rex.xmcg.weiget.TitleBar;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheMode;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 
@@ -59,17 +60,23 @@ public class DepartmentActivity extends AppCompatActivity {
         OkGo.get(URL.GET_DEPT_GROUP)
                 .tag(this)
                 .cacheKey("DeptGroup")       //必须保证key唯一,否则数据会发生覆盖
-                .cacheMode(CacheMode.DEFAULT)
-                .cacheTime(5 * 60 * 1000)
+                .cacheMode(CacheMode.IF_NONE_CACHE_REQUEST)
+                .cacheTime(10 * 10 * 1000)
                 .execute(new DialogCallback<LzyResponse<ArrayList<DepartmentGroup>>>(this) {
 
                     @Override
                     public void onSuccess(LzyResponse<ArrayList<DepartmentGroup>> responseData, Call call, Response response) {
                         groups = responseData.data;
+                        Logger.d(groups.get(2).deptGroupName);
                         adapter = new DeptGroupAdapter(DepartmentActivity.this, groups);
                         group.setAdapter(adapter);
                         onClickGroupItem();
                         group.performItemClick(group.getChildAt(0), 0, group.getItemIdAtPosition(0));
+                    }
+
+                    @Override
+                    public void onCacheSuccess(LzyResponse<ArrayList<DepartmentGroup>> responseData, Call call) {
+                        onSuccess(responseData, call, null);
                     }
 
                     @Override
@@ -87,10 +94,10 @@ public class DepartmentActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
                 OkGo.post(URL.GET_DEPT)
                         .tag(DepartmentActivity.this)
+                        .cacheKey("Dept"+position)       //必须保证key唯一,否则数据会发生覆盖
+                        .cacheMode(CacheMode.IF_NONE_CACHE_REQUEST)
+                        .cacheTime(10 * 10 * 1000)
                         .params("DeptGroupId", groups.get(position).deptGroupID)
-                        .cacheKey("Dept")       //必须保证key唯一,否则数据会发生覆盖
-                        .cacheMode(CacheMode.DEFAULT)
-                        .cacheTime(5 * 60 * 1000)
                         .execute(new DialogCallback<LzyResponse<ArrayList<DepartmentGroup>>>(DepartmentActivity.this) {
 
                             @Override
@@ -116,6 +123,11 @@ public class DepartmentActivity extends AppCompatActivity {
                                         startActivity(intent);
                                     }
                                 });
+                            }
+
+                            @Override
+                            public void onCacheSuccess(LzyResponse<ArrayList<DepartmentGroup>> responseData, Call call) {
+                                onSuccess(responseData, call, null);
                             }
 
                             @Override

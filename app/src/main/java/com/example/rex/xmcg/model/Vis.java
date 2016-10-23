@@ -1,10 +1,12 @@
 package com.example.rex.xmcg.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Rex on 2016/10/11.
  */
 
-public class Vis {
+public class Vis implements Serializable {
     public String day;
     public String deptID;
     public String opdTimeID;

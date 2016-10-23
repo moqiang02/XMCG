@@ -7,21 +7,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.rex.xmcg.activity.AboutActivity">
+
     <com.example.rex.xmcg.weiget.TitleBar
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
     <com.flyco.tablayout.SlidingTabLayout
         android:id="@+id/tl_4"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="#009688"
+        android:background="@color/white"
+        tl:tl_indicator_color="@color/blue"
         tl:tl_tab_padding="0dp"
         tl:tl_tab_width="95dp"
-        tl:tl_textsize="15sp"/>
+        tl:tl_textSelectColor="@color/blue"
+        tl:tl_textUnselectColor="@color/deep_gray"
+        tl:tl_textsize="15sp" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp"
         android:layout_width="match_parent"
-        android:layout_height="84dp"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp" />
 </LinearLayout>

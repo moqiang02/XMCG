@@ -1,10 +1,12 @@
 package com.example.rex.xmcg.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Rex on 2016/10/9.
  */
 
-public class User {
+public class User implements Serializable {
     public String patNumber;
     public String idNumber;
     public String idType;
