@@ -152,6 +152,7 @@
             android:background="@drawable/text_bg"
             android:textSize="16dp"
             android:hint="手机验证码"
+            android:inputType="number"
             android:paddingLeft="10dp" />
 
         <Button

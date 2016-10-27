@@ -1,6 +1,7 @@
 package com.example.rex.xmcg.fragment;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +22,6 @@ import com.example.rex.xmcg.utils.CommonUtils;
 import com.example.rex.xmcg.utils.SPUtils;
 import com.example.rex.xmcg.utils.TUtils;
 import com.lzy.okgo.OkGo;
-import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -36,6 +36,7 @@ public class FragmentLogin extends android.support.v4.app.Fragment implements Vi
     private EditText name, identity, phone, validate;
     private Button validate_btn, login_btn;
     private String validateStr, nameStr, phoneStr, identityStr, randomCode;
+    private TimeCount time;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,12 +57,33 @@ public class FragmentLogin extends android.support.v4.app.Fragment implements Vi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.validate_btn:
-                randomCode = CommonUtils.getRandomCode();
-                Logger.d(randomCode);
+                phoneStr = phone.getText().toString();
+                randomCode = CommonUtils.getRandomCode(6);
+                time = new TimeCount(60000, 1000);
+                OkGo.post(URL.VALIDATE)
+                        .tag(getActivity())
+                        .params("randomCode",randomCode)
+                        .params("mobile",phoneStr.trim())
+                        .execute(new DialogCallback<LzyResponse<String>>(getActivity()) {
+
+                            @Override
+                            public void onSuccess(LzyResponse<String> responseData, Call call, Response response) {
+                                SPUtils.put(getContext(),"randomCode",randomCode);
+                                time.start();// 开始计时
+                            }
+
+                            @Override
+                            public void onError(Call call, Response response, Exception e) {
+                                super.onError(call, response, e);
+                                TUtils.showLong(e.getMessage());
+                                SPUtils.put(getContext(),"randomCode","qas");
+                                validate_btn.setText("请求验证");
+                                validate_btn.setClickable(true);
+                            }
+                        });
                 break;
             case R.id.login_btn:
                 nameStr = name.getText().toString();
-                phoneStr = phone.getText().toString();
                 identityStr = identity.getText().toString();
                 validateStr = validate.getText().toString();
 
@@ -77,14 +99,14 @@ public class FragmentLogin extends android.support.v4.app.Fragment implements Vi
                     TUtils.showLong("手机不能为空");
                     return;
                 }
-//                if (TextUtils.isEmpty(validateStr)) {
-//                    TUtils.showLong("验证码不能为空");
-//                    return;
-//                }
-//                if (!randomCode.equals(validateStr)) {
-//                    TUtils.showLong( "验证码错误");
-//                    return;
-//                }
+                if (TextUtils.isEmpty(validateStr)) {
+                    TUtils.showLong("验证码不能为空");
+                    return;
+                }
+                if (!validateStr.equals(SPUtils.get(getContext(),"randomCode","dfs"))) {
+                    TUtils.showLong( "验证码错误");
+                    return;
+                }
 
                 OkGo.post(URL.CHECK_LOGIN)
                         .tag(getActivity())
@@ -116,10 +138,31 @@ public class FragmentLogin extends android.support.v4.app.Fragment implements Vi
                             @Override
                             public void onError(Call call, Response response, Exception e) {
                                 super.onError(call, response, e);
+                                TUtils.showLong(e.getMessage());
                             }
                         });
 
                 break;
+        }
+    }
+
+
+    class TimeCount extends CountDownTimer {
+        public TimeCount(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+        }
+
+        @Override
+        public void onFinish() {// 计时完毕
+            SPUtils.put(getContext(),"randomCode","qas");
+            validate_btn.setText("请求验证");
+            validate_btn.setClickable(true);
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {// 计时过程
+            validate_btn.setClickable(false);//防止重复点击
+            validate_btn.setText(millisUntilFinished / 1000 + "秒");
         }
     }
 }
