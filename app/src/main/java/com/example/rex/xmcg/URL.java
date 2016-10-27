@@ -13,4 +13,6 @@ public final class URL {
     public final static String GET_DEPT = BASE_URL+"getDepartment.php";
     public static final java.lang.String GET_REGISTER_LIST = BASE_URL+"getRegisterList.php";
     public static final java.lang.String CANCEL_REGISTER = BASE_URL+"cancelRegister.php";
+    public static final java.lang.String REGISTER = BASE_URL+"register.php";
+    public static final String VALIDATE = BASE_URL+"validate.php";
 }

@@ -29,7 +29,8 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.AboutActivity" />
-        <activity android:name=".activity.ManagerUser"></activity>
+        <activity android:name=".activity.ManagerUser" />
+        <activity android:name=".activity.RegisterSuccessActivity"></activity>
     </application>
 
 </manifest>

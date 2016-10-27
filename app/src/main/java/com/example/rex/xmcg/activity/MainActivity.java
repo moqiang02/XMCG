@@ -96,4 +96,11 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         EventBus.getDefault().unregister(this);//反注册EventBus
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        // TODO Auto-generated method stub
+        //Log.v("LH", "onSaveInstanceState"+outState);
+        //super.onSaveInstanceState(outState);   //将这一行注释掉，阻止activity保存fragment的状态
+    }
 }

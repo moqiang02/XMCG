@@ -21,6 +21,8 @@ import com.example.rex.xmcg.model.Doctor;
 import com.example.rex.xmcg.model.EventType;
 import com.example.rex.xmcg.model.LzyResponse;
 import com.example.rex.xmcg.utils.DateUtils;
+import com.example.rex.xmcg.utils.SPUtils;
+import com.example.rex.xmcg.utils.TUtils;
 import com.example.rex.xmcg.utils.ViewFindUtils;
 import com.example.rex.xmcg.weiget.TitleBar;
 import com.flyco.tablayout.SegmentTabLayout;
@@ -160,15 +162,19 @@ public class RegisterListActivity extends AppCompatActivity {
                         adapter.setOnItemClickListener(new RegisterAdapter.OnRecyclerViewItemClickListener() {
                             @Override
                             public void onItemClick(View view, Doctor doctor) {
-//                            Logger.d(doctor.doctorName);
-                                if (!doctor.isFull.equals("Y") && doctor.canReg.equals("Y")) {
-                                    Intent mIntent = new Intent(RegisterListActivity.this, RegisterActivity.class);
-                                    Bundle mBundle = new Bundle();
-                                    mBundle.putSerializable("doctor", doctor);
-                                    mBundle.putString("opdBeginDate", opdBeginDate);
-                                    mBundle.putString("opdTimeID", opdTimeID);
-                                    mIntent.putExtras(mBundle);
-                                    startActivity(mIntent);
+                                if((Boolean) SPUtils.get(RegisterListActivity.this,"isLogin",false)){
+
+                                    if (!doctor.isFull.equals("Y") && doctor.canReg.equals("Y")) {
+                                        Intent mIntent = new Intent(RegisterListActivity.this, RegisterActivity.class);
+                                        Bundle mBundle = new Bundle();
+                                        mBundle.putSerializable("doctor", doctor);
+                                        mBundle.putString("opdBeginDate", opdBeginDate);
+                                        mBundle.putString("opdTimeID", opdTimeID);
+                                        mIntent.putExtras(mBundle);
+                                        startActivity(mIntent);
+                                    }
+                                }else {
+                                    TUtils.showLong("请先登陆");
                                 }
                             }
                         });

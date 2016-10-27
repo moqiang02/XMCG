@@ -11,4 +11,6 @@ public class Doctor implements Serializable {
     public String doctorName;
     public String isFull;
     public String canReg;
+    public String doctorID;
+    public String deptID;
 }

@@ -10,17 +10,27 @@ import com.example.rex.gen.UserGDao;
 import com.example.rex.xmcg.Dao.UserG;
 import com.example.rex.xmcg.MyApplication;
 import com.example.rex.xmcg.R;
+import com.example.rex.xmcg.URL;
+import com.example.rex.xmcg.callback.DialogCallback;
 import com.example.rex.xmcg.model.Doctor;
+import com.example.rex.xmcg.model.LzyResponse;
+import com.example.rex.xmcg.model.Register;
+import com.example.rex.xmcg.utils.CommonUtils;
 import com.example.rex.xmcg.utils.DateUtils;
 import com.example.rex.xmcg.utils.SPUtils;
+import com.example.rex.xmcg.utils.TUtils;
 import com.example.rex.xmcg.weiget.TitleBar;
+import com.lzy.okgo.OkGo;
 import com.orhanobut.logger.Logger;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.Call;
+import okhttp3.Response;
 
 public class RegisterActivity extends AppCompatActivity {
     @BindView(R.id.title_bar)
@@ -37,7 +47,9 @@ public class RegisterActivity extends AppCompatActivity {
     protected TextView ymd;
     @BindView(R.id.department)
     protected TextView department;
-
+    private String opdBeginDate, opdTimeID;
+    private Doctor doctor;
+    private ArrayList<Register> registerList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +67,9 @@ public class RegisterActivity extends AppCompatActivity {
         titleBar.setTitle("挂号信息");
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        Doctor doctor = (Doctor) bundle.getSerializable("doctor");
-        String opdBeginDate = bundle.getString("opdBeginDate");
-        String opdTimeID = bundle.getString("opdTimeID");
+        doctor = (Doctor) bundle.getSerializable("doctor");
+        opdBeginDate = bundle.getString("opdBeginDate");
+        opdTimeID = bundle.getString("opdTimeID");
         Logger.d(doctor.doctorName);
 
         showUserInfo((String) SPUtils.get(this, "identity", "0"), (String) SPUtils.get(this, "patNumber", "0"));
@@ -90,12 +102,47 @@ public class RegisterActivity extends AppCompatActivity {
         List<UserG> users = userDao.loadAll();
         String userName = "";
         for (int i = 0; i < users.size(); i++) {
-            userName += users.get(i).getName()+",";
+            userName += users.get(i).getName() + ",";
         }
     }
 
     @OnClick(R.id.edit_user)
-    protected void editUser(View v){
-        startActivity(new Intent(this,ManagerUser.class));
+    protected void editUser(View v) {
+        startActivity(new Intent(this, ManagerUser.class));
+    }
+
+    @OnClick(R.id.register_ok)
+    protected void register_ok(View v) {
+        OkGo.post(URL.REGISTER)
+                .tag(this)
+                .params("identity", (String) SPUtils.get(this, "identity", ""))
+                .params("opdDate", opdBeginDate)
+                .params("deptID", doctor.deptID)
+                .params("opdTimeID", opdTimeID)
+                .params("doctorID", doctor.doctorID)
+                .params("IP", CommonUtils.getIPAddress(this))
+                .execute(new DialogCallback<LzyResponse<List<Register>>>(this) {
+
+                    @Override
+                    public void onSuccess(LzyResponse<List<Register>> responseData, Call call, Response response) {
+                        registerList = (ArrayList<Register>) responseData.data;
+                        if (registerList.size()>0) {
+                            Register register = registerList.get(0);
+                            Intent mIntent = new Intent(RegisterActivity.this, RegisterSuccessActivity.class);
+                            Bundle mBundle = new Bundle();
+                            mBundle.putSerializable("register", register);
+                            mBundle.putString("opdDate", opdBeginDate);
+                            mIntent.putExtras(mBundle);
+                            startActivity(mIntent);
+                            finish();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        TUtils.showLong(e.getMessage());
+                    }
+                });
     }
 }

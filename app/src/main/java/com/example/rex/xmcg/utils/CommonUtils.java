@@ -19,10 +19,10 @@ import java.util.Random;
 
 public class CommonUtils {
 
-    //获取四位随机数
-    public static String getRandomCode() {
+    //获取随机数
+    public static String getRandomCode(int n) {
         String yzm = "";
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < n; i++) {
             int number = new Random().nextInt(10);
             yzm += number;
         }
