@@ -49,4 +49,5 @@ dependencies {
     compile 'com.lzy.net:okgo:2.0.0'        //可以单独使用，不需要依赖下方的扩展包
     compile 'com.lzy.net:okrx:0.1.0'        //RxJava扩展支持，根据需要添加
     compile 'com.lzy.net:okserver:1.1.0'    //下载管理和上传管理扩展，根据需要添加
+    compile 'com.bigkoo:alertview:1.0.3'
 }

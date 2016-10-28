@@ -12,6 +12,8 @@ import android.widget.GridView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.bigkoo.alertview.AlertView;
+import com.bigkoo.alertview.OnItemClickListener;
 import com.example.rex.xmcg.R;
 import com.example.rex.xmcg.URL;
 import com.example.rex.xmcg.adapter.RegisterAdapter;
@@ -22,7 +24,6 @@ import com.example.rex.xmcg.model.EventType;
 import com.example.rex.xmcg.model.LzyResponse;
 import com.example.rex.xmcg.utils.DateUtils;
 import com.example.rex.xmcg.utils.SPUtils;
-import com.example.rex.xmcg.utils.TUtils;
 import com.example.rex.xmcg.utils.ViewFindUtils;
 import com.example.rex.xmcg.weiget.TitleBar;
 import com.flyco.tablayout.SegmentTabLayout;
@@ -162,7 +163,7 @@ public class RegisterListActivity extends AppCompatActivity {
                         adapter.setOnItemClickListener(new RegisterAdapter.OnRecyclerViewItemClickListener() {
                             @Override
                             public void onItemClick(View view, Doctor doctor) {
-                                if((Boolean) SPUtils.get(RegisterListActivity.this,"isLogin",false)){
+                                if ((Boolean) SPUtils.get(RegisterListActivity.this, "isLogin", false)) {
 
                                     if (!doctor.isFull.equals("Y") && doctor.canReg.equals("Y")) {
                                         Intent mIntent = new Intent(RegisterListActivity.this, RegisterActivity.class);
@@ -173,8 +174,18 @@ public class RegisterListActivity extends AppCompatActivity {
                                         mIntent.putExtras(mBundle);
                                         startActivity(mIntent);
                                     }
-                                }else {
-                                    TUtils.showLong("请先登陆");
+                                } else {
+                                    AlertView alertView = new AlertView("提示", "请先登陆", null, new String[]{"确定"}, null,
+                                            RegisterListActivity.this, AlertView.Style.Alert,
+                                            new OnItemClickListener() {
+                                                @Override
+                                                public void onItemClick(Object o, int position) {
+                                                    startActivity(new Intent(RegisterListActivity.this,MainActivity.class));
+
+                                                    EventBus.getDefault().post(new EventType.ToLogin());
+                                                }
+                                            });
+                                    alertView.show();
                                 }
                             }
                         });

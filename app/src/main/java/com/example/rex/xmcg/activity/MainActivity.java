@@ -83,12 +83,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onUIThread(EventType.Frag event) {
+    public void loginSuccess(EventType.Frag event) {
         FragmentManager mFragmentManager = getSupportFragmentManager();
         FragmentTransaction ft = mFragmentManager.beginTransaction();
         ft.hide(mFragments.get(4));
         ft.show(mFragments.get(3));
         ft.commit();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void toLogin(EventType.ToLogin event) {
+        FragmentManager mFragmentManager = getSupportFragmentManager();
+        FragmentTransaction ft = mFragmentManager.beginTransaction();
+        ft.hide(mFragments.get(0));
+        ft.hide(mFragments.get(1));
+        ft.hide(mFragments.get(2));
+        ft.hide(mFragments.get(3));
+        ft.show(mFragments.get(4));
+        ft.commitAllowingStateLoss();
+
     }
 
     @Override

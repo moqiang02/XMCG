@@ -19,4 +19,7 @@ public class EventType implements Serializable {
     public static class Frag {
     }
 
+    public static class ToLogin {
+    }
+
 }
