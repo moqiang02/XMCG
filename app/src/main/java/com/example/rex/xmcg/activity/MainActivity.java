@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             R.mipmap.tab_home_select, R.mipmap.tab_health_select,
             R.mipmap.tab_hospital_select, R.mipmap.tab_my_select};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
-
+    private Boolean toLogin = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,17 +91,9 @@ public class MainActivity extends AppCompatActivity {
         ft.commit();
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Subscribe(threadMode = ThreadMode.POSTING)
     public void toLogin(EventType.ToLogin event) {
-        FragmentManager mFragmentManager = getSupportFragmentManager();
-        FragmentTransaction ft = mFragmentManager.beginTransaction();
-        ft.hide(mFragments.get(0));
-        ft.hide(mFragments.get(1));
-        ft.hide(mFragments.get(2));
-        ft.hide(mFragments.get(3));
-        ft.show(mFragments.get(4));
-        ft.commitAllowingStateLoss();
-
+        toLogin = true;
     }
 
     @Override
@@ -115,5 +107,18 @@ public class MainActivity extends AppCompatActivity {
         // TODO Auto-generated method stub
         //Log.v("LH", "onSaveInstanceState"+outState);
         //super.onSaveInstanceState(outState);   //将这一行注释掉，阻止activity保存fragment的状态
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        if (toLogin) {
+            mTabLayout.setCurrentTab(3);
+            FragmentManager mFragmentManager = getSupportFragmentManager();
+            FragmentTransaction ft = mFragmentManager.beginTransaction();
+            ft.hide(mFragments.get(3));
+            ft.show(mFragments.get(4));
+            ft.commit();
+        }
     }
 }

@@ -175,13 +175,12 @@ public class RegisterListActivity extends AppCompatActivity {
                                         startActivity(mIntent);
                                     }
                                 } else {
-                                    AlertView alertView = new AlertView("提示", "请先登陆", null, new String[]{"确定"}, null,
+                                    AlertView alertView = new AlertView("提示", "请先登陆", "确定", null, null,
                                             RegisterListActivity.this, AlertView.Style.Alert,
                                             new OnItemClickListener() {
                                                 @Override
                                                 public void onItemClick(Object o, int position) {
                                                     startActivity(new Intent(RegisterListActivity.this,MainActivity.class));
-
                                                     EventBus.getDefault().post(new EventType.ToLogin());
                                                 }
                                             });
