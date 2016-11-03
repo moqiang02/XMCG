@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 
 import com.example.rex.xmcg.R;
@@ -16,6 +17,7 @@ import com.example.rex.xmcg.fragment.FragmentMy;
 import com.example.rex.xmcg.model.EventType;
 import com.example.rex.xmcg.model.Tab;
 import com.example.rex.xmcg.utils.SPUtils;
+import com.example.rex.xmcg.utils.TUtils;
 import com.example.rex.xmcg.utils.ViewFindUtils;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
             R.mipmap.tab_hospital_select, R.mipmap.tab_my_select};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
     private Boolean toLogin = false;
+    private long exitTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,5 +123,20 @@ public class MainActivity extends AppCompatActivity {
             ft.show(mFragments.get(4));
             ft.commit();
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTime) > 2000) {
+                TUtils.showShort("再按一次退出程序");
+                exitTime = System.currentTimeMillis();
+            } else {
+                finish();
+                System.exit(0);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
