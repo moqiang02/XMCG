@@ -5,7 +5,7 @@ package com.example.rex.xmcg;
  */
 
 public final class URL {
-//    public final static String BASE_URL = "http://192.168.1.13/test/";
+//    public final static String BASE_URL = "http://192.168.1.14/test/";
     public final static String BASE_URL = "http://cgmh.lnhoo.com/api/";
     public final static String CHECK_LOGIN  = BASE_URL+"ckeckLogin.php";
     public final static String GET_RECORD  = BASE_URL+"getRecord.php";

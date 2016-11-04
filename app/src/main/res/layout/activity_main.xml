@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ECECEC"
-    android:orientation="vertical"
-    tools:context="com.example.rex.xmcg.activity.MainActivity">
+    android:orientation="vertical">
 
     <FrameLayout
         android:id="@+id/fl_change"
         android:layout_width="match_parent"
         android:layout_alignParentTop="true"
         android:layout_above="@+id/tl_1"
-        android:layout_height="wrap_content"></FrameLayout>
+        android:layout_weight="9"
+        android:layout_height="0dp"></FrameLayout>
 
 
     <ImageView
@@ -24,10 +23,10 @@
         android:src="@mipmap/line" />
 
     <com.flyco.tablayout.CommonTabLayout
-        android:layout_alignParentBottom="true"
         android:id="@+id/tl_1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:background="#ffffff"
         android:paddingBottom="5dp"
         android:paddingTop="5dp"
@@ -39,4 +38,4 @@
         app:tl_underline_height="0dp" />
 
 
-</RelativeLayout>
+</LinearLayout>
