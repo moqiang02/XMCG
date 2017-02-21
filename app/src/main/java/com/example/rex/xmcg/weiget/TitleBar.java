@@ -76,7 +76,7 @@ public class TitleBar extends ViewGroup implements View.OnClickListener {
         mHeight = dip2px(DEFAULT_TITLE_BAR_HEIGHT);
         initView(context);
 
-        setBackgroundColor(Color.parseColor("#006599"));
+        setBackgroundColor(Color.parseColor("#FFBFC0C1"));
         setLeftTextColor(Color.WHITE);
         setTitleColor(Color.WHITE);
         if (hasKitKat() && !hasLollipop()) {

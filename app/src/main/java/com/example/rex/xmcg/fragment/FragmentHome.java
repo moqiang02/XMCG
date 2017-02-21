@@ -6,10 +6,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.rex.xmcg.R;
 import com.example.rex.xmcg.activity.DepartmentActivity;
+import com.example.rex.xmcg.weiget.TitleBar;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -17,10 +20,21 @@ import butterknife.OnClick;
  * Created by Rex on 2016/10/7.
  */
 public class FragmentHome extends android.support.v4.app.Fragment {
+    @BindView(R.id.title_bar)
+    protected TitleBar titleBar;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
+        titleBar.setLeftImageResource(R.mipmap.back);
+        titleBar.setTitle("厦门长庚医院");
+        titleBar.addAction(new TitleBar.ImageAction(R.mipmap.back) {
+            @Override
+            public void performAction(View view) {
+                Toast.makeText(getActivity(), "点击了收藏", Toast.LENGTH_SHORT).show();
+            }
+        });
         return view;
     }
 
@@ -28,7 +42,7 @@ public class FragmentHome extends android.support.v4.app.Fragment {
     void butterknifeOnItemClick(View view) {
         switch (view.getId()) {
             case R.id.bespeak:
-                startActivity(new Intent(getContext(),DepartmentActivity.class));
+                startActivity(new Intent(getContext(), DepartmentActivity.class));
                 break;
             case R.id.report:
                 Log.e("hm", "red3");
