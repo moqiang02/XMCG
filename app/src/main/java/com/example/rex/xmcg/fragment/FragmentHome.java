@@ -27,9 +27,9 @@ public class FragmentHome extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
-        titleBar.setLeftImageResource(R.mipmap.back);
+        titleBar.setLeftImageResource(R.mipmap.icon_logo);
         titleBar.setTitle("厦门长庚医院");
-        titleBar.addAction(new TitleBar.ImageAction(R.mipmap.back) {
+        titleBar.addAction(new TitleBar.ImageAction(R.mipmap.message) {
             @Override
             public void performAction(View view) {
                 Toast.makeText(getActivity(), "点击了收藏", Toast.LENGTH_SHORT).show();
