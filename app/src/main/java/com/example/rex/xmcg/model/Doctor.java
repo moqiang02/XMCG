@@ -13,4 +13,6 @@ public class Doctor implements Serializable {
     public String canReg;
     public String doctorID;
     public String deptID;
+    public String opdTimeID;
+    public DoctorBean doctorBean;
 }

@@ -38,7 +38,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
-import java.util.concurrent.Executors;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,7 +46,7 @@ import okhttp3.Response;
 
 public class RegisterListActivity extends AppCompatActivity implements OnDateSelectedListener {
     private String deptID, deptName;
-    private ArrayList<Doctor> doctorList;
+    private ArrayList<Doctor> doctorList = new ArrayList<>();
     private RegisterAdapter adapter;
     @BindView(R.id.list)
     RecyclerView mRecyclerView;
@@ -105,12 +104,50 @@ public class RegisterListActivity extends AppCompatActivity implements OnDateSel
                 //new HighlightWeekendsDecorator(),
                 oneDayDecorator
         );
-        new ApiSimulator().executeOnExecutor(Executors.newSingleThreadExecutor());
+//        new ApiSimulator().executeOnExecutor(Executors.newSingleThreadExecutor());
+        getRegisterStatus();
 
         Intent intent = getIntent();
         deptID = intent.getStringExtra("deptID");
         deptName = intent.getStringExtra("deptName");
         titleBar.setTitle(deptName);
+
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(RegisterListActivity.this));
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.setHasFixedSize(true);
+        adapter = new RegisterAdapter(RegisterListActivity.this, doctorList);
+        adapter.setOnItemClickListener(new RegisterAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, Doctor doctor) {
+                if ((Boolean) SPUtils.get(RegisterListActivity.this, "isLogin", false)) {
+
+                    if (!doctor.isFull.equals("Y") && doctor.canReg.equals("Y")) {
+                        Intent mIntent = new Intent(RegisterListActivity.this, RegisterActivity.class);
+                        Bundle mBundle = new Bundle();
+                        mBundle.putSerializable("doctor", doctor);
+                        mBundle.putString("opdBeginDate", opdBeginDate);
+                        mBundle.putString("opdTimeID", opdTimeID);
+                        mIntent.putExtras(mBundle);
+                        startActivity(mIntent);
+                    }
+                } else {
+                    AlertView alertView = new AlertView("提示", "请先登陆", "确定", null, null,
+                            RegisterListActivity.this, AlertView.Style.Alert,
+                            new OnItemClickListener() {
+                                @Override
+                                public void onItemClick(Object o, int position) {
+                                    startActivity(new Intent(RegisterListActivity.this, MainActivity.class));
+                                    EventBus.getDefault().post(new EventType.ToLogin());
+                                }
+                            });
+                    alertView.show();
+                }
+            }
+        });
+
+        // 为mRecyclerView设置适配器
+        mRecyclerView.setAdapter(adapter);
+
         String currDate = DateUtils.getYmdStr(System.currentTimeMillis());
         loadData(deptID, currDate, currDate, "1");
     }
@@ -121,7 +158,7 @@ public class RegisterListActivity extends AppCompatActivity implements OnDateSel
         oneDayDecorator.setDate(date.getDate());
         widget.invalidateDecorators();
         Logger.d(date.getDate());
-        opdBeginDate = opdEndDate = date.getDate()+"";
+        opdBeginDate = opdEndDate = date.getDate() + "";
         loadData(deptID, opdBeginDate, opdEndDate, "1");
     }
 
@@ -138,44 +175,8 @@ public class RegisterListActivity extends AppCompatActivity implements OnDateSel
 
                     @Override
                     public void onSuccess(LzyResponse<List<Doctor>> responseData, Call call, Response response) {
-                        doctorList = (ArrayList<Doctor>) responseData.data;
-                        mRecyclerView.setLayoutManager(new LinearLayoutManager(RegisterListActivity.this));
-                        // 设置ItemAnimator
-                        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-                        // 设置固定大小
-                        mRecyclerView.setHasFixedSize(true);
-                        // 初始化自定义的适配器
-                        adapter = new RegisterAdapter(RegisterListActivity.this, doctorList);
-                        adapter.setOnItemClickListener(new RegisterAdapter.OnRecyclerViewItemClickListener() {
-                            @Override
-                            public void onItemClick(View view, Doctor doctor) {
-                                if ((Boolean) SPUtils.get(RegisterListActivity.this, "isLogin", false)) {
-
-                                    if (!doctor.isFull.equals("Y") && doctor.canReg.equals("Y")) {
-                                        Intent mIntent = new Intent(RegisterListActivity.this, RegisterActivity.class);
-                                        Bundle mBundle = new Bundle();
-                                        mBundle.putSerializable("doctor", doctor);
-                                        mBundle.putString("opdBeginDate", opdBeginDate);
-                                        mBundle.putString("opdTimeID", opdTimeID);
-                                        mIntent.putExtras(mBundle);
-                                        startActivity(mIntent);
-                                    }
-                                } else {
-                                    AlertView alertView = new AlertView("提示", "请先登陆", "确定", null, null,
-                                            RegisterListActivity.this, AlertView.Style.Alert,
-                                            new OnItemClickListener() {
-                                                @Override
-                                                public void onItemClick(Object o, int position) {
-                                                    startActivity(new Intent(RegisterListActivity.this,MainActivity.class));
-                                                    EventBus.getDefault().post(new EventType.ToLogin());
-                                                }
-                                            });
-                                    alertView.show();
-                                }
-                            }
-                        });
-                        // 为mRecyclerView设置适配器
-                        mRecyclerView.setAdapter(adapter);
+                        doctorList.addAll(responseData.data);
+                        adapter.notifyDataSetChanged();
                     }
 
                     @Override
@@ -183,6 +184,10 @@ public class RegisterListActivity extends AppCompatActivity implements OnDateSel
                         super.onError(call, response, e);
                     }
                 });
+    }
+
+    private void getRegisterStatus(){
+
     }
 
     private class ApiSimulator extends AsyncTask<Void, Void, List<CalendarDay>> {
@@ -214,7 +219,7 @@ public class RegisterListActivity extends AppCompatActivity implements OnDateSel
                 return;
             }
 
-            widget.addDecorator(new EventDecorator(RegisterListActivity.this,Color.RED, calendarDays));
+            widget.addDecorator(new EventDecorator(RegisterListActivity.this, Color.RED, calendarDays));
         }
     }
 
