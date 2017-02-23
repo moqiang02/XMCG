@@ -1,6 +1,8 @@
 package com.example.rex.xmcg.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +23,7 @@ import com.example.rex.xmcg.model.LzyResponse;
 import com.example.rex.xmcg.utils.DateUtils;
 import com.example.rex.xmcg.utils.SPUtils;
 import com.example.rex.xmcg.weiget.TitleBar;
+import com.example.rex.xmcg.weiget.calendar.EventDecorator;
 import com.example.rex.xmcg.weiget.calendar.MySelectorDecorator;
 import com.example.rex.xmcg.weiget.calendar.OneDayDecorator;
 import com.lzy.okgo.OkGo;
@@ -35,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
+import java.util.concurrent.Executors;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -101,7 +105,7 @@ public class RegisterListActivity extends AppCompatActivity implements OnDateSel
                 //new HighlightWeekendsDecorator(),
                 oneDayDecorator
         );
-        //new ApiSimulator().executeOnExecutor(Executors.newSingleThreadExecutor());
+        new ApiSimulator().executeOnExecutor(Executors.newSingleThreadExecutor());
 
         Intent intent = getIntent();
         deptID = intent.getStringExtra("deptID");
@@ -179,6 +183,39 @@ public class RegisterListActivity extends AppCompatActivity implements OnDateSel
                         super.onError(call, response, e);
                     }
                 });
+    }
+
+    private class ApiSimulator extends AsyncTask<Void, Void, List<CalendarDay>> {
+
+        @Override
+        protected List<CalendarDay> doInBackground(@NonNull Void... voids) {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.MONTH, -2);
+            ArrayList<CalendarDay> dates = new ArrayList<>();
+            for (int i = 0; i < 30; i++) {
+                CalendarDay day = CalendarDay.from(calendar);
+                dates.add(day);
+                calendar.add(Calendar.DATE, 5);
+            }
+
+            return dates;
+        }
+
+        @Override
+        protected void onPostExecute(@NonNull List<CalendarDay> calendarDays) {
+            super.onPostExecute(calendarDays);
+
+            if (isFinishing()) {
+                return;
+            }
+
+            widget.addDecorator(new EventDecorator(RegisterListActivity.this,Color.RED, calendarDays));
+        }
     }
 
 }
