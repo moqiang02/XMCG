@@ -15,4 +15,5 @@ public final class URL {
     public static final java.lang.String CANCEL_REGISTER = BASE_URL+"cancelRegister.php";
     public static final java.lang.String REGISTER = BASE_URL+"register.php";
     public static final String VALIDATE = BASE_URL+"validate.php";
+    public static final String GET_REGISTER_STAUS = BASE_URL+"getRegisterStatus.php";
 }

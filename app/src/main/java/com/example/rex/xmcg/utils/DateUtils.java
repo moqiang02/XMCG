@@ -279,4 +279,11 @@ public class DateUtils {
         date = null;
         return strTime;
     }
+
+    public static String formatStrFromCalendar(Calendar calendar){
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        String dateStr = sdf.format(calendar.getTime());
+        return dateStr;
+    }
 }

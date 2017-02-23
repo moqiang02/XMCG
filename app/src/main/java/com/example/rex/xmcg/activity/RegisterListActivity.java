@@ -53,7 +53,7 @@ public class RegisterListActivity extends AppCompatActivity implements OnDateSel
     @BindView(R.id.title_bar)
     protected TitleBar titleBar;
     private View mDecorView;
-    private String opdBeginDate, opdEndDate, opdTimeID;
+    private String opdBeginDate, opdEndDate;
     @BindView(R.id.calendarView)
     MaterialCalendarView widget;
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
@@ -126,7 +126,6 @@ public class RegisterListActivity extends AppCompatActivity implements OnDateSel
                         Bundle mBundle = new Bundle();
                         mBundle.putSerializable("doctor", doctor);
                         mBundle.putString("opdBeginDate", opdBeginDate);
-                        mBundle.putString("opdTimeID", opdTimeID);
                         mIntent.putExtras(mBundle);
                         startActivity(mIntent);
                     }
@@ -149,7 +148,7 @@ public class RegisterListActivity extends AppCompatActivity implements OnDateSel
         mRecyclerView.setAdapter(adapter);
 
         String currDate = DateUtils.getYmdStr(System.currentTimeMillis());
-        loadData(deptID, currDate, currDate, "1");
+        loadData(deptID, currDate, currDate);
     }
 
     @Override
@@ -157,12 +156,13 @@ public class RegisterListActivity extends AppCompatActivity implements OnDateSel
         //If you change a decorate, you need to invalidate decorators
         oneDayDecorator.setDate(date.getDate());
         widget.invalidateDecorators();
-        Logger.d(date.getDate());
-        opdBeginDate = opdEndDate = date.getDate() + "";
-        loadData(deptID, opdBeginDate, opdEndDate, "1");
+        Logger.d(date.getCalendar());
+        Calendar calendar = date.getCalendar();
+        opdBeginDate = opdEndDate = DateUtils.formatStrFromCalendar(calendar);
+        loadData(deptID, opdBeginDate, opdEndDate);
     }
 
-    private void loadData(String deptID, final String opdBeginDate, String opdEndDate, final String opdTimeID) {
+    private void loadData(String deptID, String opdBeginDate, String opdEndDate) {
 
         OkGo.post(URL.GET_REGISTER_LIST)
                 .tag(this)
@@ -170,7 +170,6 @@ public class RegisterListActivity extends AppCompatActivity implements OnDateSel
                 .params("opdEndDate", opdEndDate)
                 .params("doctorID", "")
                 .params("deptID", deptID)
-                .params("opdTimeID", opdTimeID)
                 .execute(new DialogCallback<LzyResponse<List<Doctor>>>(this) {
 
                     @Override
@@ -186,8 +185,28 @@ public class RegisterListActivity extends AppCompatActivity implements OnDateSel
                 });
     }
 
-    private void getRegisterStatus(){
+    private void getRegisterStatus() {
+        String opdBegin = DateUtils.getYmdStr(System.currentTimeMillis());
+        String opdEnd = DateUtils.getYmdStr(System.currentTimeMillis()+ 24 * 3600 * 1000 * 14);
+        OkGo.post(URL.GET_REGISTER_STAUS)
+                .tag(this)
+                .params("opdBeginDate", opdBegin)
+                .params("opdEndDate", opdEnd)
+                .params("doctorID", "")
+                .params("deptID", deptID)
+                .execute(new DialogCallback<LzyResponse<List<Doctor>>>(this) {
 
+                    @Override
+                    public void onSuccess(LzyResponse<List<Doctor>> responseData, Call call, Response response) {
+                        doctorList.addAll(responseData.data);
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                    }
+                });
     }
 
     private class ApiSimulator extends AsyncTask<Void, Void, List<CalendarDay>> {

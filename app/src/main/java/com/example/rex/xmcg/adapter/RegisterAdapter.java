@@ -64,9 +64,16 @@ public class RegisterAdapter extends RecyclerView.Adapter<RegisterAdapter.ViewHo
         Doctor p = list.get(i);
         viewHolder.name.setText(p.doctorName);
         viewHolder.deptname.setText(p.deptName);
-        Glide.with(mContext).load(p.doctorBean.image).override(180, 160).fitCenter().into(viewHolder.avatar);
-        viewHolder.introduce.setText(p.doctorBean.adept.substring(0,20)+"...");
-        viewHolder.title.setText(p.doctorBean.title);
+        if (p.doctorBean != null){
+            Glide.with(mContext).load(p.doctorBean.image).override(180, 160).fitCenter().into(viewHolder.avatar);
+            viewHolder.introduce.setText(p.doctorBean.adept.substring(0,20)+"...");
+            viewHolder.title.setText(p.doctorBean.title);
+        }else {
+            viewHolder.avatar.setImageResource(R.mipmap.doctor);
+            viewHolder.introduce.setText("");
+            viewHolder.title.setText("");
+        }
+
         if (p.opdTimeID.equals("1")){
             viewHolder.time.setText("上午诊");
         }else if(p.opdTimeID.equals("2")){
