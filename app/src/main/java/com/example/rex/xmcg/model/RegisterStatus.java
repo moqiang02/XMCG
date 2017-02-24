@@ -8,5 +8,5 @@ import java.io.Serializable;
 
 public class RegisterStatus implements Serializable {
     public String date;
-    public String deptName;
+    public String status;
 }

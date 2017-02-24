@@ -11,12 +11,12 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.rex.xmcg.R;
 import com.example.rex.xmcg.model.Doctor;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Rex on 2016/10/14.
@@ -65,7 +65,7 @@ public class RegisterAdapter extends RecyclerView.Adapter<RegisterAdapter.ViewHo
         viewHolder.name.setText(p.doctorName);
         viewHolder.deptname.setText(p.deptName);
         if (p.doctorBean != null){
-            Glide.with(mContext).load(p.doctorBean.image).override(180, 160).fitCenter().into(viewHolder.avatar);
+            Glide.with(mContext).load(p.doctorBean.image).fitCenter().into(viewHolder.avatar);
             viewHolder.introduce.setText(p.doctorBean.adept.substring(0,20)+"...");
             viewHolder.title.setText(p.doctorBean.title);
         }else {
@@ -114,7 +114,7 @@ public class RegisterAdapter extends RecyclerView.Adapter<RegisterAdapter.ViewHo
         @BindView(R.id.status)
         TextView status;
         @BindView(R.id.avatar)
-        CircleImageView avatar;
+        RoundedImageView avatar;
         @BindView(R.id.heart)
         ImageView heart;
         @BindView(R.id.introduce)

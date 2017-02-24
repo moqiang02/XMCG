@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.rex.gen.UserGDao;
 import com.example.rex.xmcg.Dao.UserG;
 import com.example.rex.xmcg.MyApplication;
@@ -21,7 +22,7 @@ import com.example.rex.xmcg.utils.SPUtils;
 import com.example.rex.xmcg.utils.TUtils;
 import com.example.rex.xmcg.weiget.TitleBar;
 import com.lzy.okgo.OkGo;
-import com.orhanobut.logger.Logger;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +48,8 @@ public class RegisterActivity extends AppCompatActivity {
     protected TextView ymd;
     @BindView(R.id.department)
     protected TextView department;
+    @BindView(R.id.avatar)
+    protected RoundedImageView avatar;
     private String opdBeginDate, opdTimeID;
     private Doctor doctor;
     private ArrayList<Register> registerList;
@@ -68,14 +71,14 @@ public class RegisterActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         doctor = (Doctor) bundle.getSerializable("doctor");
-        opdBeginDate = bundle.getString("opdBeginDate");
-        opdTimeID = bundle.getString("opdTimeID");
-        Logger.d(doctor.doctorName);
+        opdBeginDate = doctor.opdDate;
+        opdTimeID = doctor.opdTimeID;
 
         showUserInfo((String) SPUtils.get(this, "identity", "0"), (String) SPUtils.get(this, "patNumber", "0"));
         showRegisterInfo(doctor, opdBeginDate, opdTimeID);
         showAllUsers();
 
+        Glide.with(this).load(doctor.doctorBean.image).into(avatar);
     }
 
 

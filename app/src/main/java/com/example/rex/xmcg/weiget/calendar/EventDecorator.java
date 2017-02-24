@@ -3,7 +3,6 @@ package com.example.rex.xmcg.weiget.calendar;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 
-import com.example.rex.xmcg.R;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.DayViewDecorator;
 import com.prolificinteractive.materialcalendarview.DayViewFacade;
@@ -20,10 +19,10 @@ public class EventDecorator implements DayViewDecorator {
     private HashSet<CalendarDay> dates;
     private Drawable drawable;
 
-    public EventDecorator(Activity context,int color, Collection<CalendarDay> dates) {
-        this.color = color;
+    public EventDecorator(Activity context,int draw, Collection<CalendarDay> dates) {
+//        this.color = color;
         this.dates = new HashSet<>(dates);
-        drawable = context.getResources().getDrawable(R.drawable.calendar1);
+        drawable = context.getResources().getDrawable(draw);
     }
 
     @Override

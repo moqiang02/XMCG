@@ -280,10 +280,23 @@ public class DateUtils {
         return strTime;
     }
 
-    public static String formatStrFromCalendar(Calendar calendar){
+    public static String formatStrFromCalendar(Calendar calendar) {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         String dateStr = sdf.format(calendar.getTime());
         return dateStr;
+    }
+
+    public static Calendar strToCalendar(String str) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        Date date = null;
+        try {
+            date = dateFormat.parse(str);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar;
     }
 }

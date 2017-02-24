@@ -14,5 +14,6 @@ public class Doctor implements Serializable {
     public String doctorID;
     public String deptID;
     public String opdTimeID;
+    public String opdDate;
     public DoctorBean doctorBean;
 }

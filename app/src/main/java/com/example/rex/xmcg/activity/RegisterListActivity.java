@@ -20,8 +20,10 @@ import com.example.rex.xmcg.callback.DialogCallback;
 import com.example.rex.xmcg.model.Doctor;
 import com.example.rex.xmcg.model.EventType;
 import com.example.rex.xmcg.model.LzyResponse;
+import com.example.rex.xmcg.model.RegisterStatus;
 import com.example.rex.xmcg.utils.DateUtils;
 import com.example.rex.xmcg.utils.SPUtils;
+import com.example.rex.xmcg.utils.TUtils;
 import com.example.rex.xmcg.weiget.TitleBar;
 import com.example.rex.xmcg.weiget.calendar.EventDecorator;
 import com.example.rex.xmcg.weiget.calendar.MySelectorDecorator;
@@ -52,7 +54,6 @@ public class RegisterListActivity extends AppCompatActivity implements OnDateSel
     RecyclerView mRecyclerView;
     @BindView(R.id.title_bar)
     protected TitleBar titleBar;
-    private View mDecorView;
     private String opdBeginDate, opdEndDate;
     @BindView(R.id.calendarView)
     MaterialCalendarView widget;
@@ -105,12 +106,13 @@ public class RegisterListActivity extends AppCompatActivity implements OnDateSel
                 oneDayDecorator
         );
 //        new ApiSimulator().executeOnExecutor(Executors.newSingleThreadExecutor());
-        getRegisterStatus();
 
         Intent intent = getIntent();
         deptID = intent.getStringExtra("deptID");
         deptName = intent.getStringExtra("deptName");
         titleBar.setTitle(deptName);
+
+//        getRegisterStatus();
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(RegisterListActivity.this));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -125,7 +127,6 @@ public class RegisterListActivity extends AppCompatActivity implements OnDateSel
                         Intent mIntent = new Intent(RegisterListActivity.this, RegisterActivity.class);
                         Bundle mBundle = new Bundle();
                         mBundle.putSerializable("doctor", doctor);
-                        mBundle.putString("opdBeginDate", opdBeginDate);
                         mIntent.putExtras(mBundle);
                         startActivity(mIntent);
                     }
@@ -181,25 +182,39 @@ public class RegisterListActivity extends AppCompatActivity implements OnDateSel
                     @Override
                     public void onError(Call call, Response response, Exception e) {
                         super.onError(call, response, e);
+                        TUtils.showLong(e.getMessage());
                     }
                 });
     }
 
     private void getRegisterStatus() {
         String opdBegin = DateUtils.getYmdStr(System.currentTimeMillis());
-        String opdEnd = DateUtils.getYmdStr(System.currentTimeMillis()+ 24 * 3600 * 1000 * 14);
+        String opdEnd = DateUtils.getYmdStr(System.currentTimeMillis() + 24 * 3600 * 1000 * 14);
+        Logger.d(opdEnd);
         OkGo.post(URL.GET_REGISTER_STAUS)
                 .tag(this)
                 .params("opdBeginDate", opdBegin)
                 .params("opdEndDate", opdEnd)
                 .params("doctorID", "")
                 .params("deptID", deptID)
-                .execute(new DialogCallback<LzyResponse<List<Doctor>>>(this) {
+                .execute(new DialogCallback<LzyResponse<List<RegisterStatus>>>(this) {
 
                     @Override
-                    public void onSuccess(LzyResponse<List<Doctor>> responseData, Call call, Response response) {
-                        doctorList.addAll(responseData.data);
-                        adapter.notifyDataSetChanged();
+                    public void onSuccess(LzyResponse<List<RegisterStatus>> responseData, Call call, Response response) {
+                        List<RegisterStatus> list = responseData.data;
+                        ArrayList<CalendarDay> datesY = new ArrayList<>();
+                        ArrayList<CalendarDay> datesN = new ArrayList<>();
+                        for (RegisterStatus status : list){
+                            Calendar calendar = DateUtils.strToCalendar(status.date);
+                            CalendarDay day = CalendarDay.from(calendar);
+                            if(status.status.equals("Y")){
+                                datesY.add(day);
+                            }else{
+                                datesN.add(day);
+                            }
+                        }
+                        widget.addDecorator(new EventDecorator(RegisterListActivity.this, R.drawable.calendar1, datesY));
+                        widget.addDecorator(new EventDecorator(RegisterListActivity.this, R.drawable.calendar2, datesN));
                     }
 
                     @Override

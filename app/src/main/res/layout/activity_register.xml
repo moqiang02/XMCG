@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_register"
     android:layout_width="match_parent"
@@ -24,21 +25,32 @@
             android:layout_margin="15dp"
             android:orientation="horizontal">
 
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/icon_registers" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="选择就诊人" />
+                android:layout_marginLeft="5dp"
+                android:text="选择就诊人"
+                android:textSize="15dp" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/icon_register_edit" />
 
             <TextView
                 android:id="@+id/edit_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="编辑就诊人" />
+                android:layout_marginLeft="5dp"
+                android:text="编辑就诊人"
+                android:textColor="#4D94D2"
+                android:textSize="15dp" />
         </LinearLayout>
 
         <GridView
@@ -47,7 +59,7 @@
             android:layout_height="100dp"
             android:gravity="center"
             android:horizontalSpacing="1pt"
-            android:numColumns="2"
+            android:numColumns="4"
             android:verticalSpacing="1pt" />
     </LinearLayout>
 
@@ -59,11 +71,23 @@
         android:orientation="vertical"
         android:padding="15dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="就诊卡信息" />
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/icon_idenity" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="身份信息" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/identity"
@@ -86,30 +110,48 @@
         android:background="@color/white"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="预约信息" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginLeft="15dp"
+                android:src="@mipmap/icon_yuyue" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:text="预约信息" />
+        </LinearLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/head"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_centerVertical="true"
-                android:layout_margin="15dp"
-                android:src="@mipmap/bg_circle" />
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/avatar"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="10dp"
+                android:scaleType="centerCrop"
+                app:riv_border_color="#fff"
+                app:riv_border_width="2dip"
+                app:riv_corner_radius="5dip"
+                app:riv_mutate_background="true"
+                app:riv_oval="false" />
 
             <TextView
                 android:id="@+id/name"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:layout_toRightOf="@+id/head"
+                android:layout_toRightOf="@+id/avatar"
                 android:text="姓名"
                 android:textSize="18dp"
                 android:textStyle="bold" />
@@ -130,8 +172,8 @@
                 android:layout_below="@+id/name"
                 android:layout_marginBottom="6dp"
                 android:layout_marginTop="6dp"
-                android:layout_toRightOf="@+id/head"
-                android:text="日期"
+                android:layout_toRightOf="@+id/avatar"
+                android:text="预约时间"
                 android:textSize="15dp" />
 
             <TextView
@@ -145,23 +187,7 @@
                 android:text="1213"
                 android:textSize="15dp" />
 
-            <TextView
-                android:id="@+id/ghf"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/date"
-                android:layout_toRightOf="@+id/head"
-                android:text="挂号费"
-                android:textSize="15dp" />
 
-            <TextView
-                android:id="@+id/cost"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/date"
-                android:layout_toRightOf="@+id/ghf"
-                android:text="12"
-                android:textSize="15dp" />
         </RelativeLayout>
 
     </LinearLayout>
@@ -174,7 +200,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/button_red"
+        android:background="@drawable/button_green"
         android:gravity="center"
         android:text="确认挂号"
         android:textColor="#fff"
