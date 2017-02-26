@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.example.rex.xmcg.R;
 import com.example.rex.xmcg.activity.DepartmentActivity;
+import com.example.rex.xmcg.activity.TrafficActivity;
 import com.example.rex.xmcg.weiget.TitleBar;
 
 import butterknife.BindView;
