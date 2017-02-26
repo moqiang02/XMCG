@@ -55,7 +55,7 @@ public class TrafficActivity extends AppCompatActivity implements AMap.OnMapClic
     }
 
     /**
-     * 初始化AMap对象
+     * 初始化AMap
      */
     private void init() {
         if (aMap == null) {
