@@ -60,7 +60,7 @@ public class FragmentLogin extends android.support.v4.app.Fragment implements Vi
                 phoneStr = phone.getText().toString();
                 randomCode = CommonUtils.getRandomCode(6);
                 time = new TimeCount(60000, 1000);
-                OkGo.post(URL.VALIDATE)
+/*                OkGo.post(URL.VALIDATE)
                         .tag(getActivity())
                         .params("randomCode",randomCode)
                         .params("mobile",phoneStr.trim())
@@ -80,7 +80,7 @@ public class FragmentLogin extends android.support.v4.app.Fragment implements Vi
                                 validate_btn.setText("请求验证");
                                 validate_btn.setClickable(true);
                             }
-                        });
+                        });*/
                 break;
             case R.id.login_btn:
                 nameStr = name.getText().toString();
@@ -99,14 +99,14 @@ public class FragmentLogin extends android.support.v4.app.Fragment implements Vi
                     TUtils.showLong("手机不能为空");
                     return;
                 }
-                if (TextUtils.isEmpty(validateStr)) {
+/*                if (TextUtils.isEmpty(validateStr)) {
                     TUtils.showLong("验证码不能为空");
                     return;
                 }
                 if (!validateStr.equals(SPUtils.get(getContext(),"randomCode","dfs"))) {
                     TUtils.showLong( "验证码错误");
                     return;
-                }
+                }*/
 
                 OkGo.post(URL.CHECK_LOGIN)
                         .tag(getActivity())

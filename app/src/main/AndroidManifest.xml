@@ -14,7 +14,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity"
+        <activity
+            android:name=".activity.MainActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +32,8 @@
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.AboutActivity" />
         <activity android:name=".activity.ManagerUser" />
-        <activity android:name=".activity.RegisterSuccessActivity"></activity>
+        <activity android:name=".activity.RegisterSuccessActivity" />
+        <activity android:name=".activity.TrafficActivity"></activity>
     </application>
 
 </manifest>

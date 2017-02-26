@@ -2,7 +2,6 @@ package com.example.rex.xmcg.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,14 +37,14 @@ public class FragmentHome extends android.support.v4.app.Fragment {
         return view;
     }
 
-    @OnClick({R.id.bespeak, R.id.report})
+    @OnClick({R.id.bespeak, R.id.report,R.id.traffic})
     void butterknifeOnItemClick(View view) {
         switch (view.getId()) {
             case R.id.bespeak:
                 startActivity(new Intent(getContext(), DepartmentActivity.class));
                 break;
-            case R.id.report:
-                Log.e("hm", "red3");
+            case R.id.traffic:
+                startActivity(new Intent(getContext(), TrafficActivity.class));
                 break;
         }
     }
