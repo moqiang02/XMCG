@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.example.rex.xmcg.utils;
+package com.example.rex.xmcg.weiget.map;
 
 import android.text.Html;
 import android.text.Spanned;

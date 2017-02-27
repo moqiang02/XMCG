@@ -14,7 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ManagerUser extends AppCompatActivity {
+public class ManagerUserActivity extends AppCompatActivity {
     @BindView(R.id.title_bar)
     protected TitleBar titleBar;
     @BindView(R.id.user_info_ll)
@@ -57,5 +57,39 @@ public class ManagerUser extends AppCompatActivity {
                 Log.e("hm", "tv_test3");
                 break;
         }
+    }
+
+    private void GetFamily() {
+/*        OkGo.post(URL.REGISTER)
+                .tag(this)
+                .params("identity", (String) SPUtils.get(this, "identity", ""))
+                .params("opdDate", opdBeginDate)
+                .params("deptID", doctor.deptID)
+                .params("opdTimeID", opdTimeID)
+                .params("doctorID", doctor.doctorID)
+                .params("IP", CommonUtils.getIPAddress(this))
+                .execute(new DialogCallback<LzyResponse<List<Register>>>(this) {
+
+                    @Override
+                    public void onSuccess(LzyResponse<List<Register>> responseData, Call call, Response response) {
+                        registerList = (ArrayList<Register>) responseData.data;
+                        if (registerList.size() > 0) {
+                            Register register = registerList.get(0);
+                            Intent mIntent = new Intent(RegisterActivity.this, RegisterSuccessActivity.class);
+                            Bundle mBundle = new Bundle();
+                            mBundle.putSerializable("register", register);
+                            mBundle.putString("opdDate", opdBeginDate);
+                            mIntent.putExtras(mBundle);
+                            startActivity(mIntent);
+                            finish();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Call call, Response response, Exception e) {
+                        super.onError(call, response, e);
+                        TUtils.showLong(e.getMessage());
+                    }
+                });*/
     }
 }

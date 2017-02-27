@@ -1,4 +1,4 @@
-package com.example.rex.xmcg.utils;
+package com.example.rex.xmcg.weiget.map;
 
 public class ChString {
 	public static final String Kilometer = "\u516c\u91cc";// "公里";

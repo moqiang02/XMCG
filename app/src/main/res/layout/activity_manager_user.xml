@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.rex.xmcg.activity.ManagerUser">
+    tools:context="com.example.rex.xmcg.activity.ManagerUserActivity">
 
     <com.example.rex.xmcg.weiget.TitleBar
-        android:id="@+id/title_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    android:id="@+id/title_bar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,24 +22,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/icon_registers" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="选择就诊人" />
+                android:layout_marginLeft="5dp"
+                android:text="选择就诊人"
+                android:textSize="15dp" />
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginLeft="10dp"
+                android:src="@mipmap/icon_add_user" />
 
             <TextView
                 android:id="@+id/add_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="添加就诊人" />
+                android:layout_marginLeft="5dp"
+                android:background="@color/grey"
+                android:text="添加就诊人"
+                android:textColor="#4D94D2"
+                android:textSize="15dp" />
         </LinearLayout>
 
         <GridView
@@ -48,7 +60,7 @@
             android:layout_height="100dp"
             android:gravity="center"
             android:horizontalSpacing="1pt"
-            android:numColumns="2"
+            android:numColumns="4"
             android:verticalSpacing="1pt" />
     </LinearLayout>
 
@@ -59,180 +71,252 @@
         android:layout_marginTop="10dp"
         android:background="@color/white"
         android:orientation="vertical"
-        android:visibility="gone"
         android:padding="15dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="就诊人信息" />
-
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="姓名" />
-
-        <TextView
-            android:id="@+id/identity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="身份证" />
-
-        <TextView
-            android:id="@+id/pat_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="病历号" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/add_user_ll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:visibility="gone"
-        android:layout_marginTop="10dp"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:padding="15dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="添加就诊人信息" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="10dp"
-            android:orientation="horizontal">
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:text="姓&#160;&#160;名"
-                android:textSize="15dp" />
-
-            <EditText
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@drawable/text_bg" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@mipmap/icon_user_info" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="就诊人信息" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/user_info_bg"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="姓&#160;&#160;&#160;&#160;&#160;&#160;&#160;名:" />
+
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="姓名" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="证件号码:" />
+
+
+                    <TextView
+                        android:id="@+id/identity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="证件号码" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="病&#160;历&#160;号:" />
+
+                    <TextView
+                        android:id="@+id/pat_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="病历号" />
+                </LinearLayout>
+
+
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/add_user_ll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="10dp"
-            android:orientation="horizontal">
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="15dp">
 
             <TextView
-                android:layout_width="80dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="身份证号"
-                android:textSize="15dp" />
+                android:layout_marginBottom="10dp"
+                android:text="添加就诊人信息" />
 
-            <EditText
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@drawable/text_bg" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:text="手机号码"
-                android:textSize="15dp" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@drawable/text_bg" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="10dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:text="验证码"
-                android:textSize="15dp" />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:background="@drawable/text_bg" />
-
-            <Button
-                android:id="@+id/validate_btn"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/button_orange"
                 android:gravity="center"
-                android:text="请求验证"
-                android:textColor="#fff"
-                android:textSize="17sp" />
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="姓&#160;&#160;名"
+                    android:textSize="15dp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@drawable/text_bg" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="身份证号"
+                    android:textSize="15dp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@drawable/text_bg" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="手机号码"
+                    android:textSize="15dp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@drawable/text_bg" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="验证码"
+                    android:textSize="15dp" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/text_bg" />
+
+                <Button
+                    android:id="@+id/validate_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_orange"
+                    android:gravity="center"
+                    android:text="请求验证"
+                    android:textColor="#fff"
+                    android:textSize="17sp" />
+            </LinearLayout>
+
+
         </LinearLayout>
 
+        <Button
+            android:id="@+id/delete_user_btn"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_green"
+            android:gravity="center"
+            android:text="删除"
+            android:textColor="#fff"
+            android:textSize="17sp" />
 
+        <Button
+            android:id="@+id/add_user_btn"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_green"
+            android:gravity="center"
+            android:text="添加"
+            android:textColor="#fff"
+            android:textSize="17sp" />
     </LinearLayout>
-
-    <Button
-        android:id="@+id/delete_user_btn"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/button_red"
-        android:gravity="center"
-        android:text="删除"
-        android:textColor="#fff"
-        android:visibility="gone"
-        android:textSize="17sp" />
-
-    <Button
-        android:id="@+id/add_user_btn"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/button_red"
-        android:gravity="center"
-        android:text="添加"
-        android:textColor="#fff"
-        android:textSize="17sp"
-        android:visibility="gone" />
 </LinearLayout>

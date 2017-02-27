@@ -24,7 +24,7 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="5ed2f71b88e88f81f451bb638aae0f78"/>
+            android:value="d33a87e14db97b2500301f835d0a0722"/>
         <activity
             android:name=".activity.MainActivity"
             android:launchMode="singleTask">
@@ -42,9 +42,14 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.AboutActivity" />
-        <activity android:name=".activity.ManagerUser" />
+        <activity android:name=".activity.ManagerUserActivity" />
         <activity android:name=".activity.RegisterSuccessActivity" />
-        <activity android:name=".activity.TrafficActivity"></activity>
+        <activity android:name=".activity.TrafficActivity" />
+        <activity android:name=".weiget.map.DriveRouteDetailActivity"/>
+        <activity android:name=".weiget.map.BusRouteDetailActivity"/>
+        <activity android:name=".weiget.map.WalkRouteDetailActivity"/>
+        <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
+        <service android:name="com.amap.api.location.APSService"></service>
     </application>
 
 </manifest>

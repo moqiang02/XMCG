@@ -63,7 +63,7 @@ public class DeptGroupAdapter extends BaseAdapter {
             convertView.setBackgroundColor(mContext.getResources().getColor(R.color.white));// 更改整行的背景色
             holder.img.setVisibility(View.VISIBLE);
         }else{
-            convertView.setBackgroundColor(mContext.getResources().getColor(R.color.gray));// 更改整行的背景色
+            convertView.setBackgroundColor(mContext.getResources().getColor(R.color.grey));// 更改整行的背景色
             holder.img.setVisibility(View.GONE);
         }
 

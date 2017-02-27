@@ -1,4 +1,4 @@
-package com.example.rex.xmcg.utils;
+package com.example.rex.xmcg.weiget.map;
 
 import android.content.Context;
 import android.graphics.Color;
