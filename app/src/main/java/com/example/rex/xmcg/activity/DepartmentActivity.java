@@ -12,6 +12,7 @@ import com.example.rex.xmcg.R;
 import com.example.rex.xmcg.URL;
 import com.example.rex.xmcg.adapter.DeptGroupAdapter;
 import com.example.rex.xmcg.callback.DialogCallback;
+import com.example.rex.xmcg.callback.JsonCallback;
 import com.example.rex.xmcg.model.DepartmentGroup;
 import com.example.rex.xmcg.model.LzyResponse;
 import com.example.rex.xmcg.weiget.TitleBar;
@@ -62,7 +63,7 @@ public class DepartmentActivity extends AppCompatActivity {
                 .cacheKey("DeptGroup")       //必须保证key唯一,否则数据会发生覆盖
                 .cacheMode(CacheMode.IF_NONE_CACHE_REQUEST)
                 .cacheTime(10 * 10 * 1000)
-                .execute(new DialogCallback<LzyResponse<ArrayList<DepartmentGroup>>>(this) {
+                .execute(new JsonCallback<LzyResponse<ArrayList<DepartmentGroup>>>() {
 
                     @Override
                     public void onSuccess(LzyResponse<ArrayList<DepartmentGroup>> responseData, Call call, Response response) {

@@ -1,8 +1,6 @@
 package com.example.rex.xmcg.activity;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -51,12 +49,12 @@ public class RegisterListActivity extends AppCompatActivity implements OnDateSel
     private ArrayList<Doctor> doctorList = new ArrayList<>();
     private RegisterAdapter adapter;
     @BindView(R.id.list)
-    RecyclerView mRecyclerView;
+    protected RecyclerView mRecyclerView;
     @BindView(R.id.title_bar)
     protected TitleBar titleBar;
     private String opdBeginDate, opdEndDate;
     @BindView(R.id.calendarView)
-    MaterialCalendarView widget;
+    protected MaterialCalendarView widget;
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
 
 
@@ -105,14 +103,13 @@ public class RegisterListActivity extends AppCompatActivity implements OnDateSel
                 //new HighlightWeekendsDecorator(),
                 oneDayDecorator
         );
-//        new ApiSimulator().executeOnExecutor(Executors.newSingleThreadExecutor());
 
         Intent intent = getIntent();
         deptID = intent.getStringExtra("deptID");
         deptName = intent.getStringExtra("deptName");
         titleBar.setTitle(deptName);
 
-//        getRegisterStatus();
+//        getRegisterStatus();//获取每个日期是否有号
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(RegisterListActivity.this));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -222,39 +219,6 @@ public class RegisterListActivity extends AppCompatActivity implements OnDateSel
                         super.onError(call, response, e);
                     }
                 });
-    }
-
-    private class ApiSimulator extends AsyncTask<Void, Void, List<CalendarDay>> {
-
-        @Override
-        protected List<CalendarDay> doInBackground(@NonNull Void... voids) {
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.MONTH, -2);
-            ArrayList<CalendarDay> dates = new ArrayList<>();
-            for (int i = 0; i < 30; i++) {
-                CalendarDay day = CalendarDay.from(calendar);
-                dates.add(day);
-                calendar.add(Calendar.DATE, 5);
-            }
-
-            return dates;
-        }
-
-        @Override
-        protected void onPostExecute(@NonNull List<CalendarDay> calendarDays) {
-            super.onPostExecute(calendarDays);
-
-            if (isFinishing()) {
-                return;
-            }
-
-            widget.addDecorator(new EventDecorator(RegisterListActivity.this, Color.RED, calendarDays));
-        }
     }
 
 }
