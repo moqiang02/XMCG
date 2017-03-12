@@ -22,6 +22,7 @@ import com.example.rex.xmcg.utils.CommonUtils;
 import com.example.rex.xmcg.utils.SPUtils;
 import com.example.rex.xmcg.utils.TUtils;
 import com.lzy.okgo.OkGo;
+import com.orhanobut.logger.Logger;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -115,6 +116,7 @@ public class FragmentLogin extends android.support.v4.app.Fragment implements Vi
 
                             @Override
                             public void onSuccess(LzyResponse<User> responseData, Call call, Response response) {
+                                Logger.d(responseData);
                                 User user = (User)responseData.data;
                                 SPUtils.put(getContext(),"patNumber",user.patNumber);
                                 SPUtils.put(getContext(),"isFirst",user.isFirst);

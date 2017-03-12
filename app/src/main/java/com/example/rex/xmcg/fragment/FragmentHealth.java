@@ -1,5 +1,6 @@
 package com.example.rex.xmcg.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.rex.xmcg.R;
 import com.example.rex.xmcg.URL;
+import com.example.rex.xmcg.activity.KnowledgeDetailActivity;
 import com.example.rex.xmcg.adapter.KnowledgeAdapter;
 import com.example.rex.xmcg.callback.JsonCallback;
 import com.example.rex.xmcg.model.Knowledge;
@@ -60,32 +62,18 @@ public class FragmentHealth extends android.support.v4.app.Fragment {
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setHasFixedSize(true);
         adapter = new KnowledgeAdapter(getActivity(), list);
-/*        adapter.setOnItemClickListener(new RegisterAdapter.OnRecyclerViewItemClickListener() {
+        adapter.setOnItemClickListener(new KnowledgeAdapter.OnRecyclerViewItemClickListener() {
             @Override
-            public void onItemClick(View view, Doctor doctor) {
-                if ((Boolean) SPUtils.get(getActivity(), "isLogin", false)) {
+            public void onItemClick(View view, Knowledge knowledge) {
 
-                    if (!doctor.isFull.equals("Y") && doctor.canReg.equals("Y")) {
-                        Intent mIntent = new Intent(getActivity(), RegisterActivity.class);
-                        Bundle mBundle = new Bundle();
-                        mBundle.putSerializable("doctor", doctor);
-                        mIntent.putExtras(mBundle);
-                        startActivity(mIntent);
-                    }
-                } else {
-                    AlertView alertView = new AlertView("提示", "请先登陆", "确定", null, null,
-                            getActivity(), AlertView.Style.Alert,
-                            new OnItemClickListener() {
-                                @Override
-                                public void onItemClick(Object o, int position) {
-                                    startActivity(new Intent(getActivity(), MainActivity.class));
-                                    EventBus.getDefault().post(new EventType.ToLogin());
-                                }
-                            });
-                    alertView.show();
-                }
+                Intent mIntent = new Intent(getActivity(), KnowledgeDetailActivity.class);
+                Bundle mBundle = new Bundle();
+                mBundle.putSerializable("knowledge", knowledge);
+                mIntent.putExtras(mBundle);
+                startActivity(mIntent);
+
             }
-        });*/
+        });
 
         // 为mRecyclerView设置适配器
         mRecyclerView.setAdapter(adapter);
@@ -98,16 +86,10 @@ public class FragmentHealth extends android.support.v4.app.Fragment {
 
                     @Override
                     public void onSuccess(LzyResponse<List<Knowledge>> responseData, Call call, Response response) {
-                        list = (ArrayList<Knowledge>) responseData.data;
-                        if (list.size()>0) {
-                            Knowledge k = list.get(0);
-//                            Intent mIntent = new Intent(RegisterActivity.this, RegisterSuccessActivity.class);
-//                            Bundle mBundle = new Bundle();
-//                            mBundle.putSerializable("register", register);
-//                            mBundle.putString("opdDate", opdBeginDate);
-//                            mIntent.putExtras(mBundle);
-//                            startActivity(mIntent);
-//                            getActivity().finish();
+                        ArrayList<Knowledge> datas = (ArrayList<Knowledge>) responseData.data;
+                        if (datas.size() > 0) {
+                            list.addAll(datas);
+                            adapter.notifyDataSetChanged();
                         }
                     }
 
