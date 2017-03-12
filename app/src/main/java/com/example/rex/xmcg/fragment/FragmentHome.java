@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.rex.xmcg.R;
 import com.example.rex.xmcg.activity.DepartmentActivity;
+import com.example.rex.xmcg.activity.DoctorInfoActivity;
 import com.example.rex.xmcg.weiget.TitleBar;
 
 import butterknife.BindView;
@@ -38,7 +39,7 @@ public class FragmentHome extends android.support.v4.app.Fragment {
         return view;
     }
 
-    @OnClick({R.id.bespeak, R.id.report})
+    @OnClick({R.id.bespeak, R.id.report, R.id.doctor_info})
     void butterknifeOnItemClick(View view) {
         switch (view.getId()) {
             case R.id.bespeak:
@@ -46,6 +47,9 @@ public class FragmentHome extends android.support.v4.app.Fragment {
                 break;
             case R.id.report:
                 Log.e("hm", "red3");
+                break;
+            case R.id.doctor_info:
+                startActivity(new Intent(getContext(), DoctorInfoActivity.class));
                 break;
         }
     }

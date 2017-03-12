@@ -17,4 +17,7 @@ public final class URL {
     public static final String VALIDATE = BASE_URL+"validate.php";
     public static final String GET_REGISTER_STAUS = BASE_URL+"getRegisterStatus.php";
     public static final String GET_KNOWLEDGE_LIST = BASE_URL+"getNewsList.php";
+    public static final String GET_Family = BASE_URL+"getFamily.php";
+    public static final String DEL_USER = BASE_URL+"delUser.php";
+    public static final String GET_DEPARTMENT_LIST = BASE_URL+"getDepartmentList.php";
 }

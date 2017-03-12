@@ -8,9 +8,9 @@
     tools:context="com.example.rex.xmcg.activity.ManagerUserActivity">
 
     <com.example.rex.xmcg.weiget.TitleBar
-    android:id="@+id/title_bar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,8 +26,9 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/circle_bg"
                 android:src="@mipmap/icon_registers" />
 
             <TextView
@@ -37,35 +38,40 @@
                 android:text="选择就诊人"
                 android:textSize="15dp" />
 
-            <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginLeft="10dp"
-                android:src="@mipmap/icon_add_user" />
-
-            <TextView
-                android:id="@+id/add_user"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="10dp"
                 android:background="@color/grey"
-                android:text="添加就诊人"
-                android:textColor="#4D94D2"
-                android:textSize="15dp" />
+                android:gravity="center_vertical"
+                android:padding="2dp">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@mipmap/icon_add_user" />
+
+                <TextView
+                    android:id="@+id/add_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+
+                    android:text="添加就诊人"
+                    android:textColor="#4D94D2"
+                    android:textSize="15dp" />
+            </LinearLayout>
         </LinearLayout>
 
-        <GridView
-            android:id="@+id/gv_user"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_user"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:gravity="center"
-            android:horizontalSpacing="1pt"
-            android:numColumns="4"
-            android:verticalSpacing="1pt" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp" />
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/user_info_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -74,11 +80,13 @@
         android:padding="15dp">
 
         <LinearLayout
+            android:id="@+id/ll_user_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@color/white"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -176,14 +184,15 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/add_user_ll"
+            android:id="@+id/ll_add_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
             android:background="@color/white"
             android:orientation="vertical"
-            android:padding="15dp">
+            android:padding="15dp"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -303,10 +312,11 @@
             android:gravity="center"
             android:text="删除"
             android:textColor="#fff"
-            android:textSize="17sp" />
+            android:textSize="17sp"
+            android:visibility="gone" />
 
         <Button
-            android:id="@+id/add_user_btn"
+            android:id="@+id/next"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -315,8 +325,9 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/button_green"
             android:gravity="center"
-            android:text="添加"
+            android:text="下一步"
             android:textColor="#fff"
-            android:textSize="17sp" />
+            android:textSize="17sp"
+            android:visibility="gone" />
     </LinearLayout>
 </LinearLayout>

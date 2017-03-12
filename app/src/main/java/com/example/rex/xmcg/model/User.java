@@ -13,5 +13,7 @@ public class User implements Serializable {
     public String name;
     public String isFirst;
     public String memo;
+    public String cardNo;
+    public String medicalNo;
 
 }

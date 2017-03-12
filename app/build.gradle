@@ -4,7 +4,7 @@ apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId "com.example.rex.xmcg"
         minSdkVersion 19
@@ -32,6 +32,12 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    //可以单独使用，不需要依赖下方的扩展包
+    //RxJava扩展支持，根据需要添加
+    //下载管理和上传管理扩展，根据需要添加
+    compile files('libs/Amap_2DMap_V4.2.0_20170120.jar')
+    compile files('libs/AMap_Search_V4.0.0_20170111.jar')
+    compile files('libs/AMap_Location_V3.3.0_20170118.jar')
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:gridlayout-v7:23.4.0'
     compile 'com.android.support:support-v4:23.4.0'
@@ -41,21 +47,16 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.1.0'
     compile 'com.android.support:recyclerview-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
-    testCompile 'junit:junit:4.12'
-    apt 'com.jakewharton:butterknife-compiler:8.1.0'
     compile 'com.prolificinteractive:material-calendarview:1.4.2'
     compile 'org.greenrobot:eventbus:3.0.0'
     compile 'org.greenrobot:greendao:3.0.1'
     compile 'com.lzy.net:okgo:2.0.0'
-    //可以单独使用，不需要依赖下方的扩展包
     compile 'com.lzy.net:okrx:0.1.0'
-    //RxJava扩展支持，根据需要添加
     compile 'com.lzy.net:okserver:1.1.0'
-    //下载管理和上传管理扩展，根据需要添加
     compile 'com.bigkoo:alertview:1.0.3'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile 'com.makeramen:roundedimageview:2.3.0'
-    compile files('libs/Amap_2DMap_V4.2.0_20170120.jar')
-    compile files('libs/AMap_Search_V4.0.0_20170111.jar')
-    compile files('libs/AMap_Location_V3.3.0_20170118.jar')
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
+    testCompile 'junit:junit:4.12'
+    apt 'com.jakewharton:butterknife-compiler:8.1.0'
 }
