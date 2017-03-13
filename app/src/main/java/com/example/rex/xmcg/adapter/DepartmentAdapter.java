@@ -14,6 +14,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Rex on 2016/10/11.
@@ -23,10 +24,20 @@ public class DepartmentAdapter extends RecyclerView.Adapter<DepartmentAdapter.Vi
 
     private List<DepartmentBean> list;
     private Context mContext;
+    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
     public DepartmentAdapter(Context context, List<DepartmentBean> list) {
         this.mContext = context;
         this.list = list;
+    }
+
+
+    public static interface OnRecyclerViewItemClickListener {
+        void onItemClick(View view, DepartmentBean data);
+    }
+
+    public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
+        this.mOnItemClickListener = listener;
     }
 
     @Override
@@ -41,10 +52,13 @@ public class DepartmentAdapter extends RecyclerView.Adapter<DepartmentAdapter.Vi
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         // 给ViewHolder设置元素
         DepartmentBean p = list.get(i);
-        viewHolder.name.setText(p.name);
+        if (p != null){
+            viewHolder.name.setText(p.name);
 
-        //将数据保存在itemView的Tag中，以便点击时进行获取
-        viewHolder.name.setTag(p);
+            //将数据保存在itemView的Tag中，以便点击时进行获取
+            viewHolder.name.setTag(p);
+        }
+
     }
 
     @Override
@@ -62,6 +76,12 @@ public class DepartmentAdapter extends RecyclerView.Adapter<DepartmentAdapter.Vi
             super(v);
             ButterKnife.bind(this, v);
         }
-
+        @OnClick(R.id.name)
+        public void check(View v) {
+            if (mOnItemClickListener != null) {
+                //注意这里使用getTag方法获取数据
+                mOnItemClickListener.onItemClick(v, (DepartmentBean) v.getTag());
+            }
+        }
     }
 }

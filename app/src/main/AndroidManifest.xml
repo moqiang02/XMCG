@@ -28,7 +28,7 @@
 
         <activity
             android:name=".activity.MainActivity"
-            android:launchMode="singleTask"></activity>
+            android:launchMode="singleTask" />
         <activity android:name=".activity.BespeakActivity" />
         <activity android:name=".activity.DepartmentActivity" />
         <activity
@@ -37,9 +37,7 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.AboutActivity" />
-        <activity android:name=".activity.ManagerUserActivity">
-
-        </activity>
+        <activity android:name=".activity.ManagerUserActivity"></activity>
         <activity android:name=".activity.RegisterSuccessActivity" />
         <activity android:name=".activity.TrafficActivity" />
         <activity android:name=".weiget.map.DriveRouteDetailActivity" />
@@ -56,6 +54,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.KnowledgeDetailActivity" />
+        <activity android:name=".activity.DoctorListActivity"></activity>
     </application>
 
 </manifest>

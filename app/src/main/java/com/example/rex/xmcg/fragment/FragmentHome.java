@@ -10,11 +10,7 @@ import android.widget.Toast;
 
 import com.example.rex.xmcg.R;
 import com.example.rex.xmcg.activity.DepartmentActivity;
-<<<<<<< HEAD
 import com.example.rex.xmcg.activity.DoctorInfoActivity;
-=======
-import com.example.rex.xmcg.activity.DoctorIntroduceActivity;
->>>>>>> 23d7bb6ffee4ca1a07b919153838e68eff006f32
 import com.example.rex.xmcg.weiget.TitleBar;
 
 import butterknife.BindView;

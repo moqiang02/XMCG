@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.example.rex.xmcg.R;
 import com.example.rex.xmcg.URL;
@@ -13,6 +14,7 @@ import com.example.rex.xmcg.callback.DialogCallback;
 import com.example.rex.xmcg.model.DepartmentList;
 import com.example.rex.xmcg.model.LzyResponse;
 import com.example.rex.xmcg.utils.TUtils;
+import com.example.rex.xmcg.weiget.TitleBar;
 import com.lzy.okgo.OkGo;
 
 import java.util.ArrayList;
@@ -24,6 +26,8 @@ import okhttp3.Call;
 import okhttp3.Response;
 
 public class DoctorInfoActivity extends AppCompatActivity {
+    @BindView(R.id.title_bar)
+    protected TitleBar titleBar;
     @BindView(R.id.rv)
     protected RecyclerView mRecyclerView;
     private DepartmentListAdapter adapter;
@@ -34,6 +38,15 @@ public class DoctorInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_info);
         ButterKnife.bind(this);
+
+        titleBar.setLeftImageResource(R.mipmap.back);
+        titleBar.setLeftClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        titleBar.setTitle("选择科室");
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
