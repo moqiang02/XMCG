@@ -11,8 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.rex.xmcg.R;
-import com.example.rex.xmcg.activity.RegisterActivity;
-import com.example.rex.xmcg.activity.RegisterListActivity;
+import com.example.rex.xmcg.activity.DoctorListActivity;
 import com.example.rex.xmcg.model.DepartmentBean;
 import com.example.rex.xmcg.model.DepartmentList;
 
@@ -21,7 +20,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.example.rex.xmcg.R.mipmap.doctor;
 
 /**
  * Created by Rex on 2016/10/11.
@@ -66,10 +64,10 @@ public class DepartmentListAdapter extends RecyclerView.Adapter<DepartmentListAd
         adapter.setOnItemClickListener(new DepartmentAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, DepartmentBean d) {
-                if(){
+                if(d != null){
                     Intent mIntent = new Intent(mContext, DoctorListActivity.class);
                     Bundle mBundle = new Bundle();
-                    mBundle.putSerializable("doctor", doctor);
+                    mBundle.putSerializable("DepartmentBean", d);
                     mIntent.putExtras(mBundle);
                     mContext.startActivity(mIntent);
                 }

@@ -77,8 +77,9 @@ public class RegisterActivity extends AppCompatActivity {
         showUserInfo((String) SPUtils.get(this, "identity", "0"), (String) SPUtils.get(this, "patNumber", "0"));
         showRegisterInfo(doctor, opdBeginDate, opdTimeID);
         showAllUsers();
-
-        Glide.with(this).load(doctor.doctorBean.image).into(avatar);
+        if (doctor.doctorBean != null) {
+            Glide.with(this).load(doctor.doctorBean.image).into(avatar);
+        }
     }
 
 
@@ -129,7 +130,7 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(LzyResponse<List<Register>> responseData, Call call, Response response) {
                         registerList = (ArrayList<Register>) responseData.data;
-                        if (registerList.size()>0) {
+                        if (registerList.size() > 0) {
                             Register register = registerList.get(0);
                             Intent mIntent = new Intent(RegisterActivity.this, RegisterSuccessActivity.class);
                             Bundle mBundle = new Bundle();

@@ -73,7 +73,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="10dp"
         android:background="@color/white"
         android:orientation="vertical"
@@ -191,34 +191,26 @@
             android:layout_marginTop="10dp"
             android:background="@color/white"
             android:orientation="vertical"
-            android:padding="15dp"
-            android:visibility="gone">
+            android:padding="15dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="添加就诊人信息" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingBottom="10dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp">
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:src="@mipmap/icon_user_info" />
 
                 <TextView
-                    android:layout_width="80dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="姓&#160;&#160;名"
-                    android:textSize="15dp" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:background="@drawable/text_bg" />
+                    android:layout_marginLeft="10dp"
+                    android:text="添加就诊人信息" />
             </LinearLayout>
 
             <LinearLayout
@@ -233,13 +225,17 @@
                 <TextView
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:text="身份证号"
+                    android:text="姓&#160;&#160;名："
                     android:textSize="15dp" />
 
                 <EditText
+                    android:id="@+id/add_name"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:background="@drawable/text_bg" />
+                    android:background="@drawable/text_bg"
+                    android:hint="就诊人姓名"
+                    android:padding="5dp"
+                    android:textSize="12dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -254,13 +250,17 @@
                 <TextView
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:text="手机号码"
+                    android:text="证件号码："
                     android:textSize="15dp" />
 
                 <EditText
+                    android:id="@+id/add_number"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:background="@drawable/text_bg" />
+                    android:background="@drawable/text_bg"
+                    android:hint="身份证/病历号"
+                    android:padding="5dp"
+                    android:textSize="12dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -275,10 +275,36 @@
                 <TextView
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:text="验证码"
+                    android:text="手机号码："
                     android:textSize="15dp" />
 
                 <EditText
+                    android:id="@+id/add_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@drawable/text_bg"
+                    android:hint="手机号码"
+                    android:padding="5dp"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:text="验证码："
+                    android:textSize="15dp" />
+
+                <EditText
+                    android:id="@+id/add_validate"
                     android:layout_width="0dp"
                     android:layout_height="30dp"
                     android:layout_weight="1"
@@ -292,12 +318,10 @@
                     android:layout_weight="1"
                     android:background="@drawable/button_orange"
                     android:gravity="center"
-                    android:text="请求验证"
+                    android:text="发送短信"
                     android:textColor="#fff"
                     android:textSize="17sp" />
             </LinearLayout>
-
-
         </LinearLayout>
 
         <Button
