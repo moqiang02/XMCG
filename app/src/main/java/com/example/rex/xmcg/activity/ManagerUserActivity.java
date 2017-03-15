@@ -68,7 +68,7 @@ public class ManagerUserActivity extends AppCompatActivity {
     protected RecyclerView mRecyclerView;
     private UserAdapter adapter;
     private ArrayList<User> list = new ArrayList<>();
-    private String phoneStr, randomCode;
+    private String phoneStr, randomCode, fid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,10 +85,10 @@ public class ManagerUserActivity extends AppCompatActivity {
         titleBar.setTitle("就诊人管理");
 
 
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(ManagerUserActivity.this, 4));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setHasFixedSize(true);
-        adapter = new UserAdapter(this, list);
+        adapter = new UserAdapter(ManagerUserActivity.this, list);
         adapter.setOnItemClickListener(new UserAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, User u) {
@@ -100,6 +100,7 @@ public class ManagerUserActivity extends AppCompatActivity {
                 name.setText(u.name);
                 identity.setText(u.cardNo);
                 pat_number.setText(u.medicalNo);
+                fid = u.fid;
             }
         });
 
@@ -108,7 +109,7 @@ public class ManagerUserActivity extends AppCompatActivity {
         GetFamily();
     }
 
-    @OnClick({add_user, R.id.delete_user_btn})
+    @OnClick({R.id.add_user, R.id.delete_user_btn, R.id.validate_btn, R.id.next})
     void butterknifeOnItemClick(View view) {
         switch (view.getId()) {
             case add_user:
@@ -116,20 +117,18 @@ public class ManagerUserActivity extends AppCompatActivity {
                 ll_add_user.setVisibility(View.VISIBLE);
                 delete_user_btn.setVisibility(View.GONE);
                 next.setVisibility(View.VISIBLE);
+
                 break;
             case R.id.delete_user_btn:
                 OkGo.post(URL.DEL_USER)
                         .tag(this)
-                        .params("identity", (String) SPUtils.get(this, "identity", ""))
-                        .execute(new DialogCallback<LzyResponse<List<User>>>(this) {
+                        .params("userid", "1870")
+                        .params("fid", fid)
+                        .execute(new DialogCallback<LzyResponse<User>>(this) {
 
                             @Override
-                            public void onSuccess(LzyResponse<List<User>> responseData, Call call, Response response) {
-                                ArrayList<User> tmp = (ArrayList<User>) responseData.data;
-                                if (tmp.size() > 0) {
-                                    list.addAll(tmp);
-                                    adapter.notifyDataSetChanged();
-                                }
+                            public void onSuccess(LzyResponse<User> responseData, Call call, Response response) {
+                                GetFamily();
                             }
 
                             @Override
@@ -167,16 +166,19 @@ public class ManagerUserActivity extends AppCompatActivity {
 
                 OkGo.post(URL.ADD_USER)
                         .tag(this)
-                        .params("identity", (String) SPUtils.get(this, "identity", ""))
-                        .execute(new DialogCallback<LzyResponse<List<User>>>(this) {
+                        .params("identity", numberStr)
+                        .params("name", nameStr)
+                        .params("phone", phoneStr)
+                        .params("userid", "1870")
+                        .execute(new DialogCallback<LzyResponse<User>>(this) {
 
                             @Override
-                            public void onSuccess(LzyResponse<List<User>> responseData, Call call, Response response) {
-                                ArrayList<User> tmp = (ArrayList<User>) responseData.data;
-                                if (tmp.size() > 0) {
-                                    list.addAll(tmp);
-                                    adapter.notifyDataSetChanged();
-                                }
+                            public void onSuccess(LzyResponse<User> responseData, Call call, Response response) {
+                                GetFamily();
+
+
+//                                LinearLayout ll = (LinearLayout) mRecyclerView.getChildAt(0);
+//                                ll.performClick();
                             }
 
                             @Override
@@ -225,6 +227,7 @@ public class ManagerUserActivity extends AppCompatActivity {
                     public void onSuccess(LzyResponse<List<User>> responseData, Call call, Response response) {
                         ArrayList<User> tmp = (ArrayList<User>) responseData.data;
                         if (tmp.size() > 0) {
+                            list.clear();
                             list.addAll(tmp);
                             adapter.notifyDataSetChanged();
                         }
@@ -245,7 +248,7 @@ public class ManagerUserActivity extends AppCompatActivity {
 
         @Override
         public void onFinish() {// 计时完毕
-            SPUtils.put(getContext(),"randomCode","qas1");
+            SPUtils.put(getContext(), "randomCode", "qas1");
             validate_btn.setText("请求验证");
             validate_btn.setClickable(true);
         }

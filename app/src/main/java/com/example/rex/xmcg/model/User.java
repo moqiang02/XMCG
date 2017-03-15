@@ -15,5 +15,6 @@ public class User implements Serializable {
     public String memo;
     public String cardNo;
     public String medicalNo;
+    public String fid;
 
 }

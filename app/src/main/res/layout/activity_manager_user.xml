@@ -191,6 +191,7 @@
             android:layout_marginTop="10dp"
             android:background="@color/white"
             android:orientation="vertical"
+            android:visibility="gone"
             android:padding="15dp">
 
 
@@ -259,6 +260,7 @@
                     android:layout_height="30dp"
                     android:background="@drawable/text_bg"
                     android:hint="身份证/病历号"
+                    android:inputType="number"
                     android:padding="5dp"
                     android:textSize="12dp" />
             </LinearLayout>
@@ -284,6 +286,7 @@
                     android:layout_height="30dp"
                     android:background="@drawable/text_bg"
                     android:hint="手机号码"
+                    android:inputType="number"
                     android:padding="5dp"
                     android:textSize="12dp" />
             </LinearLayout>

@@ -21,4 +21,5 @@ public final class URL {
     public static final String DEL_USER = BASE_URL+"delUser.php";
     public static final String ADD_USER = BASE_URL+"addFamily.php";
     public static final String GET_DEPARTMENT_LIST = BASE_URL+"getDepartmentList.php";
+    public static final String GET_DOCTOR_LIST = BASE_URL+"getDoctorList.php";
 }

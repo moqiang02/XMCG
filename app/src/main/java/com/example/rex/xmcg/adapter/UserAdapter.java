@@ -22,7 +22,7 @@ import butterknife.OnClick;
  * Created by Rex on 2016/10/11.
  */
 
-public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
+public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> implements View.OnClickListener {
 
     private List<User> users;
     private Context mContext;
@@ -40,6 +40,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
         this.mOnItemClickListener = listener;
+    }
+
+    @Override
+    public void onClick(View v) {
+            if (mOnItemClickListener != null) {
+                //注意这里使用getTag方法获取数据
+                mOnItemClickListener.onItemClick(v, (User) v.getTag());
+            }
     }
 
 
@@ -61,6 +69,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         // 给ViewHolder设置布局文件
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_user, viewGroup, false);//将创建的View注册点击事件
         ViewHolder vh = new ViewHolder(v);
+        v.setOnClickListener(this);
         return vh;
     }
 
@@ -74,6 +83,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         }
 
         //将数据保存在itemView的Tag中，以便点击时进行获取
+        viewHolder.itemView.setTag(p);
         viewHolder.name.setTag(p);
     }
 

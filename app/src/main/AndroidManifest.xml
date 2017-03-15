@@ -43,7 +43,8 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.AboutActivity" />
-        <activity android:name=".activity.ManagerUserActivity"></activity>
+        <activity android:name=".activity.ManagerUserActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity android:name=".activity.RegisterSuccessActivity" />
         <activity android:name=".activity.TrafficActivity" />
         <activity android:name=".weiget.map.DriveRouteDetailActivity" />

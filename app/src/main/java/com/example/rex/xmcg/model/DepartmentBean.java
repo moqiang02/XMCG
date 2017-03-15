@@ -13,4 +13,5 @@ public class DepartmentBean implements Serializable {
     public String visible;
     public String message;
     public String image;
+    public String catid;
 }
